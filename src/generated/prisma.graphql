@@ -1,5 +1,5 @@
-# source: https://qbe-fcf82f0504.herokuapp.com/database/dev
-# timestamp: Sun Mar 17 2019 15:18:04 GMT-0700 (Pacific Daylight Time)
+# source: https://qbe1-c802843c00.herokuapp.com/database/dev
+# timestamp: Sun Mar 24 2019 14:37:39 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -4849,6 +4849,7 @@ type Panel implements Node {
   addedDate: DateTime
   test: Test!
   link: String!
+  label: String
   sequences(where: SequenceWhereInput, orderBy: SequenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sequence!]
   usedSequence(where: SequenceWhereInput, orderBy: SequenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sequence!]
   questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question!]
@@ -4869,6 +4870,7 @@ type PanelConnection {
 input PanelCreateInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
@@ -4916,6 +4918,7 @@ input PanelCreateOneWithoutSentPanelsInput {
 input PanelCreateWithoutAddedByInput {
   addedDate: DateTime
   link: String!
+  label: String
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
   usedSequence: SequenceCreateManyWithoutUsedPanelsInput
@@ -4927,6 +4930,7 @@ input PanelCreateWithoutAddedByInput {
 input PanelCreateWithoutQuestionPanelsSentInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
@@ -4938,6 +4942,7 @@ input PanelCreateWithoutQuestionPanelsSentInput {
 input PanelCreateWithoutQuestionsInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
@@ -4949,6 +4954,7 @@ input PanelCreateWithoutQuestionsInput {
 input PanelCreateWithoutSentPanelsInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
@@ -4960,6 +4966,7 @@ input PanelCreateWithoutSentPanelsInput {
 input PanelCreateWithoutSequencesInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   usedSequence: SequenceCreateManyWithoutUsedPanelsInput
@@ -4971,6 +4978,7 @@ input PanelCreateWithoutSequencesInput {
 input PanelCreateWithoutTestInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   sequences: SequenceCreateManyWithoutPanelsInput
   usedSequence: SequenceCreateManyWithoutUsedPanelsInput
@@ -4982,6 +4990,7 @@ input PanelCreateWithoutTestInput {
 input PanelCreateWithoutUsedSequenceInput {
   addedDate: DateTime
   link: String!
+  label: String
   addedBy: UserCreateOneWithoutPanelsAddedInput!
   test: TestCreateOneWithoutPanelsInput!
   sequences: SequenceCreateManyWithoutPanelsInput
@@ -5006,6 +5015,8 @@ enum PanelOrderByInput {
   addedDate_DESC
   link_ASC
   link_DESC
+  label_ASC
+  label_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -5016,6 +5027,7 @@ type PanelPreviousValues {
   id: ID!
   addedDate: DateTime
   link: String!
+  label: String
 }
 
 input PanelScalarWhereInput {
@@ -5129,6 +5141,46 @@ input PanelScalarWhereInput {
 
   """All values not ending with the given string."""
   link_not_ends_with: String
+  label: String
+
+  """All values that are not equal to given value."""
+  label_not: String
+
+  """All values that are contained in given list."""
+  label_in: [String!]
+
+  """All values that are not contained in given list."""
+  label_not_in: [String!]
+
+  """All values less than the given value."""
+  label_lt: String
+
+  """All values less than or equal the given value."""
+  label_lte: String
+
+  """All values greater than the given value."""
+  label_gt: String
+
+  """All values greater than or equal the given value."""
+  label_gte: String
+
+  """All values containing the given string."""
+  label_contains: String
+
+  """All values not containing the given string."""
+  label_not_contains: String
+
+  """All values starting with the given string."""
+  label_starts_with: String
+
+  """All values not starting with the given string."""
+  label_not_starts_with: String
+
+  """All values ending with the given string."""
+  label_ends_with: String
+
+  """All values not ending with the given string."""
+  label_not_ends_with: String
 }
 
 type PanelSubscriptionPayload {
@@ -5173,6 +5225,7 @@ input PanelSubscriptionWhereInput {
 input PanelUpdateInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
@@ -5185,11 +5238,13 @@ input PanelUpdateInput {
 input PanelUpdateManyDataInput {
   addedDate: DateTime
   link: String
+  label: String
 }
 
 input PanelUpdateManyMutationInput {
   addedDate: DateTime
   link: String
+  label: String
 }
 
 input PanelUpdateManyWithoutAddedByInput {
@@ -5271,6 +5326,7 @@ input PanelUpdateOneWithoutSentPanelsInput {
 input PanelUpdateWithoutAddedByDataInput {
   addedDate: DateTime
   link: String
+  label: String
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
   usedSequence: SequenceUpdateManyWithoutUsedPanelsInput
@@ -5282,6 +5338,7 @@ input PanelUpdateWithoutAddedByDataInput {
 input PanelUpdateWithoutQuestionPanelsSentDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
@@ -5293,6 +5350,7 @@ input PanelUpdateWithoutQuestionPanelsSentDataInput {
 input PanelUpdateWithoutQuestionsDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
@@ -5304,6 +5362,7 @@ input PanelUpdateWithoutQuestionsDataInput {
 input PanelUpdateWithoutSentPanelsDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
@@ -5315,6 +5374,7 @@ input PanelUpdateWithoutSentPanelsDataInput {
 input PanelUpdateWithoutSequencesDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   usedSequence: SequenceUpdateManyWithoutUsedPanelsInput
@@ -5326,6 +5386,7 @@ input PanelUpdateWithoutSequencesDataInput {
 input PanelUpdateWithoutTestDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   sequences: SequenceUpdateManyWithoutPanelsInput
   usedSequence: SequenceUpdateManyWithoutUsedPanelsInput
@@ -5337,6 +5398,7 @@ input PanelUpdateWithoutTestDataInput {
 input PanelUpdateWithoutUsedSequenceDataInput {
   addedDate: DateTime
   link: String
+  label: String
   addedBy: UserUpdateOneRequiredWithoutPanelsAddedInput
   test: TestUpdateOneRequiredWithoutPanelsInput
   sequences: SequenceUpdateManyWithoutPanelsInput
@@ -5515,6 +5577,46 @@ input PanelWhereInput {
 
   """All values not ending with the given string."""
   link_not_ends_with: String
+  label: String
+
+  """All values that are not equal to given value."""
+  label_not: String
+
+  """All values that are contained in given list."""
+  label_in: [String!]
+
+  """All values that are not contained in given list."""
+  label_not_in: [String!]
+
+  """All values less than the given value."""
+  label_lt: String
+
+  """All values less than or equal the given value."""
+  label_lte: String
+
+  """All values greater than the given value."""
+  label_gt: String
+
+  """All values greater than or equal the given value."""
+  label_gte: String
+
+  """All values containing the given string."""
+  label_contains: String
+
+  """All values not containing the given string."""
+  label_not_contains: String
+
+  """All values starting with the given string."""
+  label_starts_with: String
+
+  """All values not starting with the given string."""
+  label_not_starts_with: String
+
+  """All values ending with the given string."""
+  label_ends_with: String
+
+  """All values not ending with the given string."""
+  label_not_ends_with: String
   addedBy: UserWhereInput
   test: TestWhereInput
   sequences_every: SequenceWhereInput

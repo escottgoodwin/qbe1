@@ -138,6 +138,7 @@ type Panel {
   addedDate: DateTime
   test: Test! @relation(name: "PanelsByTest")
   link: String!
+  label: String
   sequences: [Sequence!]! @relation(name: "PanelSequenceByTest")
   usedSequence: [Sequence!]! @relation(name: "UsedPanelBySequence")
   questions: [Question!]! @relation(name: "PanelByQuestion")

@@ -999,6 +999,39 @@ async function deletePanel(parent, { id }, ctx, info) {
   throw new Error(`Unauthorized, must be a teacher for this panel`)
 }
 
+async function addLabeledPhoto(parent, { link, label, testId }, ctx, info) {
+  const userId = await getUserId(ctx)
+  const addedDate = new Date()
+
+  const test = await ctx.db.query.test({where: { id: testId } },`{ course { students { id } } }`)
+  const testStudents = JSON.stringify(test.course)
+
+  console.log(userId)
+  console.log(testStudents)
+
+  if (testStudents.includes(userId)){
+
+    return await ctx.db.mutation.createPanel(
+      {
+        data: {
+          link,
+          addedDate,
+          label,
+          test: {
+            connect: { id: testId  }
+          },
+          addedBy: {
+            connect: { id: userId },
+          },
+        },
+      },
+      info
+    )
+  }
+  throw new Error(`Unauthorized, must be a student or teacher for this course`)
+}
+
+
 async function addResponseImage(parent, args , ctx, info) {
   const userId = await getUserId(ctx)
   const addedDate = new Date()
@@ -1665,6 +1698,7 @@ module.exports = {
   deleteTest,
   addPanel,
   deletePanel,
+  addLabeledPhoto,
   addResponseImage,
   updateResponseImage,
   deleteResponseImage,

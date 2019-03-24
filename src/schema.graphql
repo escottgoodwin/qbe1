@@ -106,6 +106,8 @@ type Mutation {
 
   addPanel(link: String!, testId: ID!): Panel! @hasRole(roles: ["TEACHER","ADMIN"])
 
+  addLabeledPhoto(link: String!, testId: ID!, label: String!): Panel! @hasRole(roles: ["STUDENT","TEACHER","ADMIN"])
+
   deletePanel(id: ID!): Panel! @hasRole(roles: ["TEACHER","ADMIN"])
 
   link: String!, type: String!
