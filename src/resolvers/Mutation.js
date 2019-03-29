@@ -17,6 +17,10 @@ function checkField(itemIds) {
   }
 }
 
+const getData = async () => {
+  return await Promise.all(list.map(item => anAsyncFunction(item)))
+}
+
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -979,6 +983,40 @@ async function addPanel(parent, { link, testId }, ctx, info) {
   throw new Error(`Unauthorized, must be a teacher for this test`)
 }
 
+async function addPanels(parent, { uploadUrls, testId }, ctx, info) {
+  const userId = await getUserId(ctx)
+  const addedDate = new Date()
+
+  const test = await ctx.db.query.test({where: { id: testId } },`{ course { teachers { id } } }`)
+  const testTeachers = JSON.stringify(test.course)
+
+  if (testTeachers.includes(userId)){
+
+      const uploadedPanels =  await Promise.all(uploadUrls.map(async (link) => {
+        ctx.db.mutation.createPanel(
+          {
+            data: {
+              link,
+              addedDate,
+              test: {
+                connect: { id: testId  }
+              },
+              addedBy: {
+                connect: { id: userId },
+              },
+            },
+          },
+          info
+        )
+    })
+  )
+  return {
+    authMsg: 'Panels Uploaded',
+    }
+  }
+  throw new Error(`Unauthorized, must be a teacher for this test`)
+}
+
 async function deletePanel(parent, { id }, ctx, info) {
 
   const userId = await getUserId(ctx)
@@ -1694,6 +1732,7 @@ module.exports = {
   updateTest,
   deleteTest,
   addPanel,
+  addPanels,
   deletePanel,
   addLabeledPhoto,
   addResponseImage,
