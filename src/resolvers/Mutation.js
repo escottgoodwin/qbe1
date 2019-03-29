@@ -1006,9 +1006,6 @@ async function addLabeledPhoto(parent, { link, label, testId }, ctx, info) {
   const test = await ctx.db.query.test({where: { id: testId } },`{ course { students { id } } }`)
   const testStudents = JSON.stringify(test.course)
 
-  console.log(userId)
-  console.log(testStudents)
-
   if (testStudents.includes(userId)){
 
     return await ctx.db.mutation.createPanel(
