@@ -1,9 +1,10 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const crypto = require('crypto')
-const { APP_SECRET, getUserId, getUser } = require('../utils')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+var cloudinary = require('cloudinary');
 const util = require('util');
-const moment = require('moment')
+const moment = require('moment');
+const { APP_SECRET, getUserId, getUser } = require('../utils');
 
 const hosturl = process.env.HOST_URL
 
@@ -987,54 +988,42 @@ async function addPanels(parent, { uploadUrls, testId }, ctx, info) {
   const userId = await getUserId(ctx)
   const addedDate = new Date()
 
-  const test = await ctx.db.query.test({where: { id: testId } },`{ course { teachers { id } } }`)
+  const test = await ctx.db.query.test({where: { id: testId } },`{ course panels { link } { teachers { id } } }`)
   const testTeachers = JSON.stringify(test.course)
 
   if (testTeachers.includes(userId)){
 
-      const uploadedPanels =  await Promise.all(uploadUrls.map(async (link) => {
-        ctx.db.mutation.createPanel(
-          {
-            data: {
-              link,
-              addedDate,
-              test: {
-                connect: { id: testId  }
-              },
-              addedBy: {
-                connect: { id: userId },
-              },
-            },
-          },
-          info
-        )
-    })
-  )
-  return {
-    authMsg: 'Panels Uploaded',
-    }
+        return {
+          authMsg: "Panels uploaded"
+        }
+
   }
   throw new Error(`Unauthorized, must be a teacher for this test`)
 }
 
 async function deletePanel(parent, { id }, ctx, info) {
 
+  cloudinary.config({
+  cloud_name: 'dkucuwpta',
+  api_key: '116718584637922',
+  api_secret: 'MZYzZ_DptS-L2R3n_Pqt_8SbIEc' 
+});
+
   const userId = await getUserId(ctx)
-  const panel = await ctx.db.query.panel({where: { id: id } },`{ test { course { teachers { id } } } } `)
-  const testTeachers = JSON.stringify(panel.test.course)
 
-  if (testTeachers.includes(userId)){
-
-    return await ctx.db.mutation.deletePanel(
+    const panel = await ctx.db.mutation.deletePanel(
       {
         where: {
           id: id
         }
       },
-      info
+      `{ id link }`
     )
-  }
-  throw new Error(`Unauthorized, must be a teacher for this panel`)
+    const url = panel.link
+    const public_id = url.substring(62).replace('.jpg','')
+    cloudinary.v2.uploader.destroy(public_id)
+    return panel
+
 }
 
 async function addLabeledPhoto(parent, { link, label, testId }, ctx, info) {
