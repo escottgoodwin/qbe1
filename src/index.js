@@ -21,29 +21,7 @@ const { directiveResolvers } = require("./directives")
 const resolvers = {
   Query,
   Mutation,
-  Subscription: {
-    challengeMsg: {
-      subscribe: (parent, args, ctx, info) => {
-        return ctx.db.subscription.challengeMessage(
-          { where:{
-            AND: [
-              {
-                mutation_in: ["CREATED"]
-              },
-              {
-              node: {
-                challenge: {
-                  id: args.challengeId
-                  }
-                }
-              }
-            ] }
-          },
-          info
-        );
-      }
-    }
-  },
+  Subscription,
   CourseSearch,
   UserSearch,
   InstitutionSearch,

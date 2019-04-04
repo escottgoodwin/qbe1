@@ -1,4 +1,4 @@
-# import User, Institution,Course, ChallengeMessageSubscriptionPayload, ChallengeMessageSubscriptionWhereInput, ChallengeMessageSubscriptionPayload UserWhereUniqueInput, ChallengeMessageWhereInput, CourseOrderByInput, ChallengeMessageOrderByInput, ResponseImageWhereInput, CourseWhereInput, AnswerWhereInput, ChallengeWhereInput, ResponseImageOrderByInput,  QuestionChoiceWhereInput, PanelWhereInput,  TestWhereInput, DepartmentWhereInput, UserOrderByInput, UserWhereInput, InstitutionWhereInput, InstitutionOrderByInput, DepartmentOrderByInput, TestOrderByInput, PanelOrderByInput, QuestionWhereInput, QuestionOrderByInput, QuestionChoice, ChallengeOrderByInput, AnswerOrderByInput, Test, Question, QuestionChoice, Challenge, Answer,Sequence from "./generated/prisma.graphql"
+# import User, Institution,Course, ChallengeMessageSubscriptionPayload, PanelSubscriptionPayload, ChallengeMessageSubscriptionWhereInput, ChallengeMessageSubscriptionPayload UserWhereUniqueInput, ChallengeMessageWhereInput, CourseOrderByInput, ChallengeMessageOrderByInput, ResponseImageWhereInput, CourseWhereInput, AnswerWhereInput, ChallengeWhereInput, ResponseImageOrderByInput,  QuestionChoiceWhereInput, PanelWhereInput,  TestWhereInput, DepartmentWhereInput, UserOrderByInput, UserWhereInput, InstitutionWhereInput, InstitutionOrderByInput, DepartmentOrderByInput, TestOrderByInput, PanelOrderByInput, QuestionWhereInput, QuestionOrderByInput, QuestionChoice, ChallengeOrderByInput, AnswerOrderByInput, Test, Question, QuestionChoice, Challenge, Answer,Sequence from "./generated/prisma.graphql"
 
 directive @isAuthenticated on QUERY | FIELD_DEFINITION  | MUTATION
 directive @hasRole(roles: [String]) on QUERY | FIELD_DEFINITION  | MUTATION
@@ -176,6 +176,11 @@ type Mutation {
   touchIdEnabled: Boolean): User!
 }
 
+type Subscription {
+  challengeMsg(challengeId: ID!): ChallengeMessageSubscriptionPayload
+  newPanel(testId: ID!): PercentPanelCorrect
+}
+
 type ArticleRecommendation {
   link: String!
   title: String!
@@ -187,9 +192,7 @@ type ArticleRecommendations {
   recommendations: [ArticleRecommendation!]!
 }
 
-type Subscription {
-  challengeMsg(challengeId: ID!): ChallengeMessageSubscriptionPayload
-}
+
 
 type UserSearch {
   users: [User!]!
