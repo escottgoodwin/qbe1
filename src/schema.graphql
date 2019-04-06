@@ -182,6 +182,8 @@ type Subscription {
   newQuestion(testId: ID!): QuestionSubscriptionPayload
   newChallenge(testId: ID!): ChallengeSubscriptionPayload
   panelCount(testId: ID!): Count
+  questionCount(testId: ID!): Count
+  challengeCount(testId: ID!): Count
 }
 
 type ArticleRecommendation {
