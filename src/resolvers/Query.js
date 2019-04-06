@@ -304,6 +304,8 @@ async function testPanelStats(parent, args, ctx, info) {
 
       const panels = await ctx.db.query.panels({ where: { test: { id: args.testId } } }, `{ id link questions { questionAnswers {  answer { correct } } } } ` )
 
+      const count = panels.length
+
       const panelPercents = panels.map(panel => ({
         id:panel.id,
         question:'',
@@ -314,8 +316,10 @@ async function testPanelStats(parent, args, ctx, info) {
       })
     )
 
-      return panelPercents
-
+      return {
+        count: count,
+        panelPercents: panelPercents
+      }
 }
 
 async function tests(parent, args, ctx, info) {
