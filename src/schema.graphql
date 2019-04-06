@@ -1,4 +1,4 @@
-# import User, Institution,Course, ChallengeMessageSubscriptionPayload, PanelSubscriptionPayload, ChallengeMessageSubscriptionWhereInput, ChallengeMessageSubscriptionPayload UserWhereUniqueInput, ChallengeMessageWhereInput, CourseOrderByInput, ChallengeMessageOrderByInput, ResponseImageWhereInput, CourseWhereInput, AnswerWhereInput, ChallengeWhereInput, ResponseImageOrderByInput,  QuestionChoiceWhereInput, PanelWhereInput,  TestWhereInput, DepartmentWhereInput, UserOrderByInput, UserWhereInput, InstitutionWhereInput, InstitutionOrderByInput, DepartmentOrderByInput, TestOrderByInput, PanelOrderByInput, QuestionWhereInput, QuestionOrderByInput, QuestionChoice, ChallengeOrderByInput, AnswerOrderByInput, Test, Question, QuestionChoice, Challenge, Answer,Sequence from "./generated/prisma.graphql"
+# import User, Institution,Course, ChallengeMessageSubscriptionPayload, ChallengeSubscriptionPayload, QuestionSubscriptionPayload, ChallengeMessageSubscriptionWhereInput, ChallengeMessageSubscriptionPayload UserWhereUniqueInput, ChallengeMessageWhereInput, CourseOrderByInput, ChallengeMessageOrderByInput, ResponseImageWhereInput, CourseWhereInput, AnswerWhereInput, ChallengeWhereInput, ResponseImageOrderByInput,  QuestionChoiceWhereInput, PanelWhereInput,  TestWhereInput, DepartmentWhereInput, UserOrderByInput, UserWhereInput, InstitutionWhereInput, InstitutionOrderByInput, DepartmentOrderByInput, TestOrderByInput, PanelOrderByInput, QuestionWhereInput, QuestionOrderByInput, QuestionChoice, ChallengeOrderByInput, AnswerOrderByInput, Test, Question, QuestionChoice, Challenge, Answer,Sequence from "./generated/prisma.graphql"
 
 directive @isAuthenticated on QUERY | FIELD_DEFINITION  | MUTATION
 directive @hasRole(roles: [String]) on QUERY | FIELD_DEFINITION  | MUTATION
@@ -179,6 +179,9 @@ type Mutation {
 type Subscription {
   challengeMsg(challengeId: ID!): ChallengeMessageSubscriptionPayload
   newPanel(testId: ID!): PercentPanelCorrect
+  newQuestion(testId: ID!): QuestionSubscriptionPayload
+  newChallenge(testId: ID!): ChallengeSubscriptionPayload
+  panelCount(testId: ID!): Count
 }
 
 type ArticleRecommendation {
@@ -191,8 +194,6 @@ type ArticleRecommendations {
   link: String!
   recommendations: [ArticleRecommendation!]!
 }
-
-
 
 type UserSearch {
   users: [User!]!
@@ -240,6 +241,7 @@ type AnswerStats {
 }
 
 type PercentCorrect {
+  id: ID!
   name: String!
   total: Int!
   totalCorrect: Int!
@@ -307,4 +309,8 @@ type SentQuestion {
 
 type JoinCourse {
   authMsg: String!
+}
+
+type Count {
+  count: Int!
 }

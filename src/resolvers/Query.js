@@ -192,6 +192,7 @@ async function userAnsweredStats(parent, args, ctx, info){
     const percentCorrect = qpercent(questionCorrectPercent)
 
     return {
+      id: userId,
       name: '',
       total: answersConnection.aggregate.count,
       totalCorrect: answersCorrectConnection.aggregate.count,
@@ -267,6 +268,7 @@ async function userTestStats(parent, args, ctx, info) {
       const percentCorrect = qpercent(questionCorrectPercent)
 
       return {
+        id: userId,
         name: firstName + ' ' + lastName,
         total: answersConnection.aggregate.count,
         totalCorrect: answersCorrectConnection.aggregate.count,

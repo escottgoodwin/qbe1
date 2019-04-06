@@ -56,7 +56,173 @@ const newPanel = {
     }
 
 
+const panelCount = {
+      subscribe: async (parent, args, ctx, info) => {
+        return ctx.db.subscription
+          .panel({ where:{
+            AND: [
+              {
+                mutation_in: ["CREATED","DELETED"]
+              },
+              {
+              node: {
+                test: {
+                  id: args.testId
+                  }
+                }
+              }
+            ] }
+          },
+        `{ node { id } }` )
+      },
+      resolve: async (payload, args, ctx, info) => {
+
+        const panelsConnection = await ctx.db.query.panelsConnection(
+          {
+            where: {
+              test: {
+                id: args.testId
+              }
+            }
+          },
+          `{ aggregate { count } }`
+        )
+
+        return {
+          count: panelsConnection.aggregate.count
+        }
+      },
+    }
+
+const questionCount = {
+      subscribe: async (parent, args, ctx, info) => {
+        return ctx.db.subscription
+          .question({ where:{
+            AND: [
+              {
+                mutation_in: ["CREATED","DELETED"]
+              },
+              {
+              node: {
+                test: {
+                  id: args.testId
+                  }
+                }
+              }
+            ] }
+          },
+        `{ node { id } }` )
+      },
+      resolve: async (payload, args, ctx, info) => {
+
+        const questionsConnection = await ctx.db.query.questionsConnection(
+          {
+            where: {
+              test: {
+                id: args.testId
+              }
+            }
+          },
+          `{ aggregate { count } }`
+        )
+
+        return {
+          count: questionsConnection.aggregate.count
+        }
+      },
+    }
+
+const challengeCount = {
+      subscribe: async (parent, args, ctx, info) => {
+        return ctx.db.subscription
+          .challengeC({ where:{
+            AND: [
+              {
+                mutation_in: ["CREATED","DELETED"]
+              },
+              {
+              node: {
+                test: {
+                  id: args.testId
+                  }
+                }
+              }
+            ] }
+          },
+        `{ node { id } }` )
+      },
+      resolve: async (payload, args, ctx, info) => {
+
+        const challengesConnection = await ctx.db.query.challengesConnection(
+          {
+            where: {
+              test: {
+                id: args.testId
+              }
+            }
+          },
+          `{ aggregate { count } }`
+        )
+
+        return {
+          count: challengesConnection.aggregate.count
+        }
+      },
+    }
+
+
+const newQuestion = {
+    subscribe: (parent, args, ctx, info) => {
+      return ctx.db.subscription.question(
+        { where:{
+          AND: [
+            {
+              mutation_in: ["CREATED","DELETED"]
+            },
+            {
+            node: {
+              test: {
+                id: args.testId
+                }
+              }
+            }
+          ] }
+        },
+        info
+      )
+    }
+  }
+
+const newChallenge = {
+    subscribe: (parent, args, ctx, info) => {
+      return ctx.db.subscription.challenge(
+        { where:{
+          AND: [
+            {
+              mutation_in: ["CREATED","DELETED"]
+            },
+            {
+              node: {
+                test: {
+                  id: args.testId
+                  }
+                }
+            }
+          ] }
+        },
+        info
+      )
+    }
+  }
+
+
+
 module.exports = {
   challengeMsg,
-  newPanel
+  newPanel,
+  newQuestion,
+  newChallenge,
+  panelCount,
+  questionCount,
+  challengeCount
 }
