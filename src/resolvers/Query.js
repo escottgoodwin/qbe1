@@ -304,9 +304,7 @@ async function testPanelStats(parent, args, ctx, info) {
 
       const panels = await ctx.db.query.panels({ where: { test: { id: args.testId } } }, `{ id link questions { questionAnswers {  answer { correct } } } } ` )
 
-      const count = panels.length
-
-      const panelPercents = panels.map(panel => ({
+      const testPanelStats = panels.map(panel => ({
         id:panel.id,
         question:'',
         panelLink:panel.link,
@@ -315,11 +313,7 @@ async function testPanelStats(parent, args, ctx, info) {
         percentCorrect: flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).filter(a => a).length / flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).length > 0 ? flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).filter(a => a).length / flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).length : 0.0
       })
     )
-
-      return {
-        count: count,
-        panelPercents: panelPercents
-      }
+      return testPanelStats
 }
 
 async function tests(parent, args, ctx, info) {
