@@ -59,10 +59,10 @@ const newPanel = {
 const panelCount = {
       subscribe: async (parent, args, ctx, info) => {
         return ctx.db.subscription
-          .panel({ where:{
+          .panel({ where: {
             AND: [
               {
-                mutation_in: ["CREATED","DELETED"]
+                mutation_in: ["CREATED", "DELETED"]
               },
               {
               node: {

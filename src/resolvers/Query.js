@@ -157,12 +157,16 @@ async function testStats(parent, args, ctx, info) {
 
       const answersConnection = await ctx.db.query.answersConnection({ where: { answer:{ question: { test: { id: args.testId } } } } }, countSelectionSet)
       const answersCorrectConnection = await ctx.db.query.answersConnection({ where: { answer: { question:{ test:{ id: args.testId } } }, answerCorrect: true } }, countSelectionSet)
-      const questionCorrectPercent = answersCorrectConnection.aggregate.count / answersConnection.aggregate.count
+      const questionCorrectPercent = answersConnection / answersCorrectConnection > 0 ? answersConnection / answersCorrectConnection : 0.0
+
+      const total = answersConnection.aggregate.count
+      const totalCorrect = answersCorrectConnection.aggregate.count
+      const percentCorrect = totalCorrect / total > 0 ? totalCorrect / total : 0.0
 
       return {
-        total: answersConnection.aggregate.count,
-        totalCorrect: answersCorrectConnection.aggregate.count,
-        //percentCorrect: questionCorrectPercent,
+        total: total,
+        totalCorrect: totalCorrect,
+        percentCorrect: percentCorrect
       }
 }
 
