@@ -181,9 +181,11 @@ type Subscription {
   newPanel(testId: ID!): PercentPanelCorrect
   newQuestion(testId: ID!): QuestionSubscriptionPayload
   newChallenge(testId: ID!): ChallengeSubscriptionPayload
+  newAnswer(testId: ID!): AnswerSubscriptionPayload
   panelCount(testId: ID!): Count
   questionCount(testId: ID!): Count
   challengeCount(testId: ID!): Count
+  answerCount(testId: ID!): PercentCorrect
 }
 
 type ArticleRecommendation {
