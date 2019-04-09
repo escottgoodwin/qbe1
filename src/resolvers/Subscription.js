@@ -40,13 +40,13 @@ const newPanel = {
               }
             ] }
           },
-        `{ node { id link questions { questionAnswers {  answer { correct } } } } }` )
+        `{ node { id link label questions { questionAnswers {  answer { correct } } } } }` )
       },
       resolve: (payload, args, context, info) => {
         const panel = payload.panel.node
         return {
           id:panel.id,
-          question:'',
+          question:panel.label,
           panelLink:panel.link,
           total: flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).length,
           totalCorrect: flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).filter(a => a).length,
