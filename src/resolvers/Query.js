@@ -145,6 +145,47 @@ async function course(parent, args, ctx, info) {
 
 }
 
+async function courseDashboard(parent, args, ctx, info) {
+
+    async function testList(testId){
+
+      const queriedCourseTest= await ctx.db.query.test(
+        { where: { id: testId } }, `{ subject testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
+
+      const questions = queriedCourseTest.questions
+      const subject= queriedCourseTest.subject
+      const testDate= queriedCourseTest.testDate
+      const testNumber= queriedCourseTest.testNumber
+      const questionsCount= questions.length > 0 ? questions.length : 0
+      const panelsCount= queriedCourseTest.panels.length
+      const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
+      const answersCount= answers.length>0 ? answers.length : 0
+      const answersCorrect= answers.length>0 ? answers.filter(a => a.answerCorrect).length : 0
+      const accuracy= answersCorrect / answersCount>0 ? answersCorrect / answersCount : 0.0
+      const challengeCount=  answers.filter(a => !!a.challenge).length > 0 ? answers.filter(a => !!a.challenge).length : 0
+
+      return {
+        subject,
+        testDate,
+        testNumber,
+        questionsCount,
+        panelsCount,
+        answersCount,
+        accuracy,
+        challengeCount
+      }
+  }
+
+    const courseTests = await ctx.db.query.course( { where: { id: args.courseId } },`{ tests { id } }`)
+
+    const courseTestList = await Promise.all(courseTests.tests.map(test => (testList(test.id))))
+    console.log(courseTestList)
+
+    return courseTestList
+
+}
+
+
 async function testStats(parent, args, ctx, info) {
 
       const countSelectionSet = `
@@ -668,6 +709,7 @@ module.exports = {
   institution,
   courses,
   course,
+  courseDashboard,
   tests,
   test,
   testStats,
