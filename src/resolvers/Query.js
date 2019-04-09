@@ -166,6 +166,7 @@ async function courseDashboard(parent, args, ctx, info) {
 
       return {
         id: queriedCourseTest.id,
+        deleted:queriedCourseTest.deleted,
         subject,
         testDate,
         testNumber,

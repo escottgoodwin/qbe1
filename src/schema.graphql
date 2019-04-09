@@ -328,6 +328,7 @@ type StatsCount {
 
 type CourseTest {
   id: ID!
+  deleted: Boolean
   subject: String!
   testDate: DateTime!
   testNumber: String!
