@@ -176,12 +176,31 @@ async function courseDashboard(parent, args, ctx, info) {
       }
   }
 
-    const courseTests = await ctx.db.query.course( { where: { id: args.courseId } },`{ tests { id } }`)
+    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber students { id } tests { id } }`)
 
-    const courseTestList = await Promise.all(courseTests.tests.map(test => (testList(test.id))))
-    console.log(courseTestList)
+    const courseTestList = await Promise.all(course.tests.map(test => (testList(test.id))))
 
-    return courseTestList
+    const courseOutput = {
+      id: course.id,
+      deleted: course.deleted,
+      name: course.name,
+      courseName: course.courseName,
+      studentCount: course.students.length,
+      testCount: course.tests.length,
+      courseTestList: courseTestList
+    }
+
+    console.log(courseOutput)
+
+    return {
+      id: course.id,
+      deleted: course.deleted,
+      name: course.name,
+      courseName: course.courseName,
+      studentCount: course.students.length,
+      testCount: course.tests.length,
+      courseTestList: courseTestList
+  }
 
 }
 

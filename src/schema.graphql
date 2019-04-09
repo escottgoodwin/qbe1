@@ -15,7 +15,7 @@ type Query {
 
   course(id: ID!): Course! @isAuthenticated
 
-  courseDashboard(courseId: ID!): [CourseTest!] @isAuthenticated
+  courseDashboard(courseId: ID!): CourseDashboard! @isAuthenticated
 
   users(filter: String, where: UserWhereInput, skip: Int, first: Int, orderBy: UserOrderByInput): UserSearch! @isAuthenticated
 
@@ -335,4 +335,14 @@ type CourseTest {
   answersCount: Int!
   accuracy: Float!
   challengeCount: Int!
+}
+
+type CourseDashboard {
+    id: ID!
+    deleted: Boolean
+    name: String!
+    courseName: String!
+    studentCount: Int!
+    testCount: Int!
+    courseTestList: [CourseTest!]
 }
