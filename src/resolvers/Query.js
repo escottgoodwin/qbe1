@@ -150,7 +150,7 @@ async function courseDashboard(parent, args, ctx, info) {
     async function testList(testId){
 
       const queriedCourseTest= await ctx.db.query.test(
-        { where: { id: testId } }, `{ subject testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
+        { where: { id: testId } }, `{ id subject deleted published release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
 
       const questions = queriedCourseTest.questions
       const subject= queriedCourseTest.subject
@@ -165,9 +165,14 @@ async function courseDashboard(parent, args, ctx, info) {
       const challengeCount=  answers.filter(a => !!a.challenge).length > 0 ? answers.filter(a => !!a.challenge).length : 0
 
       return {
+        id: queriedCourseTest.id,
         subject,
         testDate,
         testNumber,
+        release: queriedCourseTest.release,
+        published:queriedCourseTest.published,
+        releaseDate:queriedCourseTest.releaseDate,
+        publishDate:queriedCourseTest.publishDate,
         questionsCount,
         panelsCount,
         answersCount,
@@ -176,27 +181,16 @@ async function courseDashboard(parent, args, ctx, info) {
       }
   }
 
-    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber students { id } tests { id } }`)
+    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber time students { id } tests { id } }`)
 
     const courseTestList = await Promise.all(course.tests.map(test => (testList(test.id))))
-
-    const courseOutput = {
-      id: course.id,
-      deleted: course.deleted,
-      name: course.name,
-      courseName: course.courseName,
-      studentCount: course.students.length,
-      testCount: course.tests.length,
-      courseTestList: courseTestList
-    }
-
-    console.log(courseOutput)
 
     return {
       id: course.id,
       deleted: course.deleted,
       name: course.name,
-      courseName: course.courseName,
+      time: course.time,
+      courseNumber : course.courseNumber ,
       studentCount: course.students.length,
       testCount: course.tests.length,
       courseTestList: courseTestList

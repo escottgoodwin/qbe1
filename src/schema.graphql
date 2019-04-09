@@ -327,9 +327,14 @@ type StatsCount {
 }
 
 type CourseTest {
+  id: ID!
   subject: String!
   testDate: DateTime!
   testNumber: String!
+  release: Boolean
+  published: Boolean
+  releaseDate: DateTime
+  publishDate: DateTime
   questionsCount: Int!
   panelsCount: Int!
   answersCount: Int!
@@ -341,7 +346,8 @@ type CourseDashboard {
     id: ID!
     deleted: Boolean
     name: String!
-    courseName: String!
+    time: DateTime!
+    courseNumber: String!
     studentCount: Int!
     testCount: Int!
     courseTestList: [CourseTest!]
