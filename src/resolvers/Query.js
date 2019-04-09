@@ -199,6 +199,41 @@ async function courseDashboard(parent, args, ctx, info) {
 
 }
 
+async function testList(parent, args, ctx, info) {
+
+      const queriedCourseTest= await ctx.db.query.test(
+        { where: { id: args.testId } }, `{ id subject deleted published release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
+
+      const questions = queriedCourseTest.questions
+      const subject= queriedCourseTest.subject
+      const testDate= queriedCourseTest.testDate
+      const testNumber= queriedCourseTest.testNumber
+      const questionsCount= questions.length > 0 ? questions.length : 0
+      const panelsCount= queriedCourseTest.panels.length
+      const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
+      const answersCount= answers.length>0 ? answers.length : 0
+      const answersCorrect= answers.length>0 ? answers.filter(a => a.answerCorrect).length : 0
+      const accuracy= answersCorrect / answersCount>0 ? answersCorrect / answersCount : 0.0
+      const challengeCount=  answers.filter(a => !!a.challenge).length > 0 ? answers.filter(a => !!a.challenge).length : 0
+
+      return {
+        id: queriedCourseTest.id,
+        deleted:queriedCourseTest.deleted,
+        subject,
+        testDate,
+        testNumber,
+        release: queriedCourseTest.release,
+        published:queriedCourseTest.published,
+        releaseDate:queriedCourseTest.releaseDate,
+        publishDate:queriedCourseTest.publishDate,
+        questionsCount,
+        panelsCount,
+        answersCount,
+        accuracy,
+        challengeCount
+      }
+}
+
 
 async function testStats(parent, args, ctx, info) {
 
@@ -724,6 +759,7 @@ module.exports = {
   courses,
   course,
   courseDashboard,
+  testList,
   tests,
   test,
   testStats,

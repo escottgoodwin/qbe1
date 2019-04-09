@@ -17,6 +17,8 @@ type Query {
 
   courseDashboard(courseId: ID!): CourseDashboard! @isAuthenticated
 
+  testList(testId: ID!): CourseTest! @isAuthenticated
+
   users(filter: String, where: UserWhereInput, skip: Int, first: Int, orderBy: UserOrderByInput): UserSearch! @isAuthenticated
 
   user(id: ID!): User! @isAuthenticated
