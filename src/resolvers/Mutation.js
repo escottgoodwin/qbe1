@@ -773,9 +773,12 @@ async function addTest(parent, { subject, testNumber, testDate, courseId }, ctx,
   )
 }
 
+
 async function publishTest(parent, args, ctx, info) {
   const userId = await getUserId(ctx)
   const publishDate = new Date()
+  const expirationTime = publishDate
+  expirationTime.setHours(expirationTime.getHours() + 1)
   const sequenceAddedDate = new Date()
   const testEndDate = moment(args.testEndDate).format()
 
@@ -825,6 +828,61 @@ async function publishTest(parent, args, ctx, info) {
       },
     },
     `{ id studs pans }`
+  )
+
+  const sentTo = studentShuffleIds[0]
+
+  const question = await ctx.db.mutation.createQuestion(
+    {
+      data: {
+        sentTo: {
+          connect: { id: sentTo }
+        },
+        question: args.question,
+        expirationTime:args.expirationTime,
+        addedDate: publishDate,
+        test: {
+          connect: { id: args.testId  }
+        },
+        panel: {
+          connect: { id: args.panelId  }
+        },
+        addedBy: {
+          connect: { id: userId },
+        },
+        choices: {
+          create: [
+          {
+          choice:args.choice1,
+          correct: args.choiceCorrect1,
+          addedBy: {
+            connect: { id: userId },
+          },
+          },
+          {
+          choice:args.choice2,
+          correct: args.choiceCorrect2,
+          addedBy: {
+            connect: { id: userId },
+          },
+          },{
+          choice:args.choice3,
+          correct: args.choiceCorrect3,
+          addedBy: {
+            connect: { id: userId },
+          },
+          },{
+          choice:args.choice4,
+          correct: args.choiceCorrect4,
+          addedBy: {
+            connect: { id: userId },
+          },
+          },
+        ]
+      }
+      },
+    },
+    `{ id question test { subject id } panel { id link } choices { id choice correct } }`
   )
 
   return test
@@ -1006,7 +1064,7 @@ async function deletePanel(parent, { id }, ctx, info) {
   cloudinary.config({
   cloud_name: 'dkucuwpta',
   api_key: '116718584637922',
-  api_secret: 'MZYzZ_DptS-L2R3n_Pqt_8SbIEc' 
+  api_secret: 'MZYzZ_DptS-L2R3n_Pqt_8SbIEc'
 });
 
   const userId = await getUserId(ctx)
