@@ -786,6 +786,9 @@ async function publishTest(parent, args, ctx, info) {
     {
       data: {
         published: true,
+        startTime:args.startTime,
+        endTime:args.endTime,
+        endDate:args.endDate,
         publishDate,
         updateDate: publishDate,
         updatedBy: {
@@ -817,9 +820,9 @@ async function publishTest(parent, args, ctx, info) {
         addedBy:{
           connect: { id: userId  }
         },
-        startHour:args.startHour,
-        endHour:args.endHour,
-        testEndDate,
+        startHour: args.startTime,
+        endHour: args.endTime,
+        testEndDate: args.endDate,
         test: {
           connect: { id: args.testId }
         },
