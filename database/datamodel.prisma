@@ -122,8 +122,8 @@ type Test {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   course: Course! @relation(name: "TestsByCourse")

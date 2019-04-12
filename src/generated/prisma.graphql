@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Sun Mar 24 2019 14:37:39 GMT-0700 (Pacific Daylight Time)
+# timestamp: Thu Apr 11 2019 16:23:12 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -9048,8 +9048,8 @@ type Test implements Node {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   course: Course!
@@ -9078,8 +9078,8 @@ input TestCreateInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9130,8 +9130,8 @@ input TestCreateWithoutAddedByInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   updatedBy: UserCreateOneWithoutTestUpdatesInput
@@ -9151,8 +9151,8 @@ input TestCreateWithoutCourseInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9172,8 +9172,8 @@ input TestCreateWithoutPanelsInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9193,8 +9193,8 @@ input TestCreateWithoutQuestionsInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9214,8 +9214,8 @@ input TestCreateWithoutSequencesInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9235,8 +9235,8 @@ input TestCreateWithoutUpdatedByInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserCreateOneWithoutTestsAddedInput!
@@ -9301,8 +9301,8 @@ type TestPreviousValues {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
 }
@@ -9554,50 +9554,86 @@ input TestScalarWhereInput {
 
   """All values greater than or equal the given value."""
   releaseDate_gte: DateTime
-  startTime: DateTime
+  startTime: String
 
   """All values that are not equal to given value."""
-  startTime_not: DateTime
+  startTime_not: String
 
   """All values that are contained in given list."""
-  startTime_in: [DateTime!]
+  startTime_in: [String!]
 
   """All values that are not contained in given list."""
-  startTime_not_in: [DateTime!]
+  startTime_not_in: [String!]
 
   """All values less than the given value."""
-  startTime_lt: DateTime
+  startTime_lt: String
 
   """All values less than or equal the given value."""
-  startTime_lte: DateTime
+  startTime_lte: String
 
   """All values greater than the given value."""
-  startTime_gt: DateTime
+  startTime_gt: String
 
   """All values greater than or equal the given value."""
-  startTime_gte: DateTime
-  endTime: DateTime
+  startTime_gte: String
+
+  """All values containing the given string."""
+  startTime_contains: String
+
+  """All values not containing the given string."""
+  startTime_not_contains: String
+
+  """All values starting with the given string."""
+  startTime_starts_with: String
+
+  """All values not starting with the given string."""
+  startTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  startTime_ends_with: String
+
+  """All values not ending with the given string."""
+  startTime_not_ends_with: String
+  endTime: String
 
   """All values that are not equal to given value."""
-  endTime_not: DateTime
+  endTime_not: String
 
   """All values that are contained in given list."""
-  endTime_in: [DateTime!]
+  endTime_in: [String!]
 
   """All values that are not contained in given list."""
-  endTime_not_in: [DateTime!]
+  endTime_not_in: [String!]
 
   """All values less than the given value."""
-  endTime_lt: DateTime
+  endTime_lt: String
 
   """All values less than or equal the given value."""
-  endTime_lte: DateTime
+  endTime_lte: String
 
   """All values greater than the given value."""
-  endTime_gt: DateTime
+  endTime_gt: String
 
   """All values greater than or equal the given value."""
-  endTime_gte: DateTime
+  endTime_gte: String
+
+  """All values containing the given string."""
+  endTime_contains: String
+
+  """All values not containing the given string."""
+  endTime_not_contains: String
+
+  """All values starting with the given string."""
+  endTime_starts_with: String
+
+  """All values not starting with the given string."""
+  endTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  endTime_ends_with: String
+
+  """All values not ending with the given string."""
+  endTime_not_ends_with: String
   endDate: DateTime
 
   """All values that are not equal to given value."""
@@ -9675,8 +9711,8 @@ input TestUpdateInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -9697,8 +9733,8 @@ input TestUpdateManyDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
 }
@@ -9713,8 +9749,8 @@ input TestUpdateManyMutationInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
 }
@@ -9788,8 +9824,8 @@ input TestUpdateWithoutAddedByDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   updatedBy: UserUpdateOneWithoutTestUpdatesInput
@@ -9809,8 +9845,8 @@ input TestUpdateWithoutCourseDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -9830,8 +9866,8 @@ input TestUpdateWithoutPanelsDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -9851,8 +9887,8 @@ input TestUpdateWithoutQuestionsDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -9872,8 +9908,8 @@ input TestUpdateWithoutSequencesDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -9893,8 +9929,8 @@ input TestUpdateWithoutUpdatedByDataInput {
   publishDate: DateTime
   release: Boolean
   releaseDate: DateTime
-  startTime: DateTime
-  endTime: DateTime
+  startTime: String
+  endTime: String
   endDate: DateTime
   deleted: Boolean
   addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
@@ -10199,50 +10235,86 @@ input TestWhereInput {
 
   """All values greater than or equal the given value."""
   releaseDate_gte: DateTime
-  startTime: DateTime
+  startTime: String
 
   """All values that are not equal to given value."""
-  startTime_not: DateTime
+  startTime_not: String
 
   """All values that are contained in given list."""
-  startTime_in: [DateTime!]
+  startTime_in: [String!]
 
   """All values that are not contained in given list."""
-  startTime_not_in: [DateTime!]
+  startTime_not_in: [String!]
 
   """All values less than the given value."""
-  startTime_lt: DateTime
+  startTime_lt: String
 
   """All values less than or equal the given value."""
-  startTime_lte: DateTime
+  startTime_lte: String
 
   """All values greater than the given value."""
-  startTime_gt: DateTime
+  startTime_gt: String
 
   """All values greater than or equal the given value."""
-  startTime_gte: DateTime
-  endTime: DateTime
+  startTime_gte: String
+
+  """All values containing the given string."""
+  startTime_contains: String
+
+  """All values not containing the given string."""
+  startTime_not_contains: String
+
+  """All values starting with the given string."""
+  startTime_starts_with: String
+
+  """All values not starting with the given string."""
+  startTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  startTime_ends_with: String
+
+  """All values not ending with the given string."""
+  startTime_not_ends_with: String
+  endTime: String
 
   """All values that are not equal to given value."""
-  endTime_not: DateTime
+  endTime_not: String
 
   """All values that are contained in given list."""
-  endTime_in: [DateTime!]
+  endTime_in: [String!]
 
   """All values that are not contained in given list."""
-  endTime_not_in: [DateTime!]
+  endTime_not_in: [String!]
 
   """All values less than the given value."""
-  endTime_lt: DateTime
+  endTime_lt: String
 
   """All values less than or equal the given value."""
-  endTime_lte: DateTime
+  endTime_lte: String
 
   """All values greater than the given value."""
-  endTime_gt: DateTime
+  endTime_gt: String
 
   """All values greater than or equal the given value."""
-  endTime_gte: DateTime
+  endTime_gte: String
+
+  """All values containing the given string."""
+  endTime_contains: String
+
+  """All values not containing the given string."""
+  endTime_not_contains: String
+
+  """All values starting with the given string."""
+  endTime_starts_with: String
+
+  """All values not starting with the given string."""
+  endTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  endTime_ends_with: String
+
+  """All values not ending with the given string."""
+  endTime_not_ends_with: String
   endDate: DateTime
 
   """All values that are not equal to given value."""

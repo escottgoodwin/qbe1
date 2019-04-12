@@ -892,6 +892,56 @@ async function publishTest(parent, args, ctx, info) {
 
 }
 
+async function editPublishTest(parent, args, ctx, info) {
+  const userId = await getUserId(ctx)
+  const updateDate = new Date()
+
+  const test = await ctx.db.mutation.updateTest(
+    {
+      data: {
+        published: args.published,
+        startTime: args.startTime,
+        endTime: args.endTime,
+        endDate: args.endDate,
+        updateDate,
+        updatedBy: {
+          connect: {
+            id: userId
+          },
+        },
+      },
+      where: {
+        id: args.testId
+    },
+  },
+  `{ id subject testNumber testDate panels { id } course { students { id } } }`
+  )
+
+  const sequence =  ctx.db.mutation.updateSequence(
+    {
+      data: {
+        updatedBy:{
+          connect: { id: userId  }
+        },
+        updateDate,
+        startHour: args.startTime,
+        endHour: args.endTime,
+        testEndDate: args.endDate,
+      },
+      where: {
+        test: {
+          id: args.testId
+        }
+      },
+    },
+    `{ id studs pans }`
+  )
+
+  return test
+
+}
+
+
 async function sendQuestion(parent, args, ctx, info) {
   const userId = await getUserId(ctx)
   const sequenceUpdateDate = new Date()
@@ -1806,6 +1856,7 @@ module.exports = {
   updateSequence,
   deleteSequence,
   publishTest,
+  editPublishTest,
   sendQuestion,
   updateUser
 }
