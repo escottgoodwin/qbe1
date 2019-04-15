@@ -193,7 +193,7 @@ const newQuestion = {
       )
     }
   }
-
+  
 const newChallenge = {
     subscribe: (parent, args, ctx, info) => {
       return ctx.db.subscription.challenge(
@@ -204,10 +204,14 @@ const newChallenge = {
             },
             {
               node: {
-                test: {
-                  id: args.testId
+                answer:{
+                  question:{
+                    test:{
+                      id:args.testId
+                    }
                   }
                 }
+              }
             }
           ] }
         },
