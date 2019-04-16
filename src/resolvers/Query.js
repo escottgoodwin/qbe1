@@ -162,7 +162,26 @@ async function courseDashboard(parent, args, ctx, info) {
       const answersCount= answers.length>0 ? answers.length : 0
       const answersCorrect= answers.length>0 ? answers.filter(a => a.answerCorrect).length : 0
       const accuracy= answersCorrect / answersCount>0 ? answersCorrect / answersCount : 0.0
-      const challengeCount=  answers.filter(a => !!a.challenge).length > 0 ? answers.filter(a => !!a.challenge).length : 0
+
+      const challengeCount = await ctx.db.query.challengesConnection({
+        where: {
+            answer:{
+              question:{
+                test:{
+                  id:testId
+                }
+              }
+            }
+        }
+      },
+      `
+        {
+          aggregate {
+            count
+          }
+        }
+      `
+    )
 
       return {
         id: queriedCourseTest.id,
@@ -178,7 +197,7 @@ async function courseDashboard(parent, args, ctx, info) {
         panelsCount,
         answersCount,
         accuracy,
-        challengeCount
+        challengeCount: challengeCount.aggregate.count
       }
   }
 
@@ -702,6 +721,7 @@ async function challengeMessages(parent, args, ctx, info) {
       }
     }
   `
+
   const challengeMessagesConnection = await ctx.db.query.challengeMessagesConnection({ where }, countSelectionSet)
 
   return {
