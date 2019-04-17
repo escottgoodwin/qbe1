@@ -47,7 +47,7 @@ const newPanel = {
         const panel = payload.panel.node
         return {
           id:panel.id,
-          question:panel.label,
+          question:panel.label ? panel.label : '',
           panelLink:panel.link,
           total: flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).length,
           totalCorrect: flat(panel.questions.map(q => q.questionAnswers.map(a => a.answer.correct))).filter(a => a).length,
@@ -193,7 +193,7 @@ const newQuestion = {
       )
     }
   }
-  
+
 const newChallenge = {
     subscribe: (parent, args, ctx, info) => {
       return ctx.db.subscription.challenge(
