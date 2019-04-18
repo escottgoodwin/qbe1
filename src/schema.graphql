@@ -263,7 +263,7 @@ type PercentCorrectUserQuestions {
 
 type PercentPanelCorrect {
   id: ID!
-  question: String!
+  question: String
   panelLink: String!
   total: Int!
   totalCorrect: Int!

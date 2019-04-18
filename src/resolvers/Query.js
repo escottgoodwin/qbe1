@@ -152,6 +152,9 @@ async function courseDashboard(parent, args, ctx, info) {
       const queriedCourseTest= await ctx.db.query.test(
         { where: { id: testId } }, `{ id subject deleted published release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
 
+      const queriedCourseAnswers= await ctx.db.query.answers(
+        { where: { question: {test:{ id:testId } } } }, `{ id answerCorrect }`)
+
       const questions = queriedCourseTest.questions
       const subject= queriedCourseTest.subject
       const testDate= queriedCourseTest.testDate
@@ -159,8 +162,8 @@ async function courseDashboard(parent, args, ctx, info) {
       const questionsCount= questions.length > 0 ? questions.length : 0
       const panelsCount= queriedCourseTest.panels.length
       const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
-      const answersCount= answers.length>0 ? answers.length : 0
-      const answersCorrect= answers.length>0 ? answers.filter(a => a.answerCorrect).length : 0
+      const answersCount= queriedCourseAnswers.length>0 ? queriedCourseAnswers.length : 0
+      const answersCorrect= queriedCourseAnswers.length>0 ? queriedCourseAnswers.filter(a => a.answerCorrect).length : 0
       const accuracy= answersCorrect / answersCount>0 ? answersCorrect / answersCount : 0.0
 
       const challengeCount = await ctx.db.query.challengesConnection({
