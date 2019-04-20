@@ -835,11 +835,16 @@ async function publishTest(parent, args, ctx, info) {
 
   const sentTo = studentShuffleIds[0]
 
+  const sentPanel = studentShuffleIds[0]
+  console.log(sentPanel)
   const question = await ctx.db.mutation.createQuestion(
     {
       data: {
         sentTo: {
           connect: { id: sentTo }
+        },
+        sentPanel: {
+          connect: { id: sentPanel }
         },
         question: args.question,
         expirationTime:args.expirationTime,
