@@ -805,13 +805,15 @@ async function publishTest(parent, args, ctx, info) {
   )
     // get all students for a course
   const studentIds = test.course.students
-
   const panelIds = test.panels
 
   const studentShuffle = shuffleArray(studentIds)
   const panelShuffle = shuffleArray(panelIds)
   const studentShuffleIds = studentShuffle.map(student => student.id)
   const panelShuffleIds = panelShuffle.map(panel => panel.id)
+  console.log(studentShuffleIds)
+
+  console.log(panelShuffleIds)
 
   const sequence =  ctx.db.mutation.createSequence(
     {
@@ -834,9 +836,10 @@ async function publishTest(parent, args, ctx, info) {
   )
 
   const sentTo = studentShuffleIds[0]
+  const sentPanel = panelShuffleIds[0]
+  console.log('student',sentTo)
+  console.log('panel',sentPanel)
 
-  const sentPanel = studentShuffleIds[0]
-  console.log(sentPanel)
   const question = await ctx.db.mutation.createQuestion(
     {
       data: {

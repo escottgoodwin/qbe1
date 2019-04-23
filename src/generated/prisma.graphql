@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Thu Apr 11 2019 16:23:12 GMT-0700 (Pacific Daylight Time)
+# timestamp: Mon Apr 22 2019 15:11:58 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -7966,6 +7966,7 @@ type Sequence implements Node {
   pans: [String!]!
   usedstuds: [String!]!
   usedpans: [String!]!
+  testCycles: Test
 }
 
 """A connection to a list of items."""
@@ -7995,6 +7996,7 @@ input SequenceCreateInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateManyWithoutAddedByInput {
@@ -8019,6 +8021,11 @@ input SequenceCreateManyWithoutSentToInput {
 
 input SequenceCreateManyWithoutStudentsInput {
   create: [SequenceCreateWithoutStudentsInput!]
+  connect: [SequenceWhereUniqueInput!]
+}
+
+input SequenceCreateManyWithoutTestCyclesInput {
+  create: [SequenceCreateWithoutTestCyclesInput!]
   connect: [SequenceWhereUniqueInput!]
 }
 
@@ -8069,6 +8076,7 @@ input SequenceCreateWithoutAddedByInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutPanelsInput {
@@ -8087,6 +8095,7 @@ input SequenceCreateWithoutPanelsInput {
   usedStudents: UserCreateManyWithoutUsedTestSequenceInput
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutSentPanelInput {
@@ -8105,6 +8114,7 @@ input SequenceCreateWithoutSentPanelInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutSentToInput {
@@ -8123,6 +8133,7 @@ input SequenceCreateWithoutSentToInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutStudentsInput {
@@ -8140,6 +8151,26 @@ input SequenceCreateWithoutStudentsInput {
   sentPanel: PanelCreateOneWithoutSentPanelsInput
   usedStudents: UserCreateManyWithoutUsedTestSequenceInput
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
+  panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
+}
+
+input SequenceCreateWithoutTestCyclesInput {
+  sequenceAddedDate: DateTime
+  startHour: String
+  endHour: String
+  testEndDate: DateTime
+  studs: SequenceCreatestudsInput
+  pans: SequenceCreatepansInput
+  usedstuds: SequenceCreateusedstudsInput
+  usedpans: SequenceCreateusedpansInput
+  addedBy: UserCreateOneWithoutSequencesAddedInput!
+  test: TestCreateOneWithoutSequencesInput!
+  sentTo: UserCreateOneWithoutSentToSequencesInput
+  sentPanel: PanelCreateOneWithoutSentPanelsInput
+  usedStudents: UserCreateManyWithoutUsedTestSequenceInput
+  usedPanels: PanelCreateManyWithoutUsedSequenceInput
+  students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
 }
 
@@ -8159,6 +8190,7 @@ input SequenceCreateWithoutTestInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutUsedPanelsInput {
@@ -8177,6 +8209,7 @@ input SequenceCreateWithoutUsedPanelsInput {
   usedStudents: UserCreateManyWithoutUsedTestSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 input SequenceCreateWithoutUsedStudentsInput {
@@ -8195,6 +8228,7 @@ input SequenceCreateWithoutUsedStudentsInput {
   usedPanels: PanelCreateManyWithoutUsedSequenceInput
   students: UserCreateManyWithoutTestSequenceInput
   panels: PanelCreateManyWithoutSequencesInput
+  testCycles: TestCreateOneWithoutSequenceCyclesInput
 }
 
 """An edge in a connection."""
@@ -8466,6 +8500,7 @@ input SequenceUpdateInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateManyDataInput {
@@ -8545,6 +8580,17 @@ input SequenceUpdateManyWithoutStudentsInput {
   upsert: [SequenceUpsertWithWhereUniqueWithoutStudentsInput!]
 }
 
+input SequenceUpdateManyWithoutTestCyclesInput {
+  create: [SequenceCreateWithoutTestCyclesInput!]
+  connect: [SequenceWhereUniqueInput!]
+  disconnect: [SequenceWhereUniqueInput!]
+  delete: [SequenceWhereUniqueInput!]
+  update: [SequenceUpdateWithWhereUniqueWithoutTestCyclesInput!]
+  updateMany: [SequenceUpdateManyWithWhereNestedInput!]
+  deleteMany: [SequenceScalarWhereInput!]
+  upsert: [SequenceUpsertWithWhereUniqueWithoutTestCyclesInput!]
+}
+
 input SequenceUpdateManyWithoutUsedPanelsInput {
   create: [SequenceCreateWithoutUsedPanelsInput!]
   connect: [SequenceWhereUniqueInput!]
@@ -8613,6 +8659,7 @@ input SequenceUpdateWithoutAddedByDataInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutPanelsDataInput {
@@ -8631,6 +8678,7 @@ input SequenceUpdateWithoutPanelsDataInput {
   usedStudents: UserUpdateManyWithoutUsedTestSequenceInput
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutSentPanelDataInput {
@@ -8649,6 +8697,7 @@ input SequenceUpdateWithoutSentPanelDataInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutSentToDataInput {
@@ -8667,6 +8716,7 @@ input SequenceUpdateWithoutSentToDataInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutStudentsDataInput {
@@ -8684,6 +8734,26 @@ input SequenceUpdateWithoutStudentsDataInput {
   sentPanel: PanelUpdateOneWithoutSentPanelsInput
   usedStudents: UserUpdateManyWithoutUsedTestSequenceInput
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
+  panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
+}
+
+input SequenceUpdateWithoutTestCyclesDataInput {
+  sequenceAddedDate: DateTime
+  startHour: String
+  endHour: String
+  testEndDate: DateTime
+  studs: SequenceUpdatestudsInput
+  pans: SequenceUpdatepansInput
+  usedstuds: SequenceUpdateusedstudsInput
+  usedpans: SequenceUpdateusedpansInput
+  addedBy: UserUpdateOneRequiredWithoutSequencesAddedInput
+  test: TestUpdateOneRequiredWithoutSequencesInput
+  sentTo: UserUpdateOneWithoutSentToSequencesInput
+  sentPanel: PanelUpdateOneWithoutSentPanelsInput
+  usedStudents: UserUpdateManyWithoutUsedTestSequenceInput
+  usedPanels: PanelUpdateManyWithoutUsedSequenceInput
+  students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
 }
 
@@ -8703,6 +8773,7 @@ input SequenceUpdateWithoutTestDataInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutUsedPanelsDataInput {
@@ -8721,6 +8792,7 @@ input SequenceUpdateWithoutUsedPanelsDataInput {
   usedStudents: UserUpdateManyWithoutUsedTestSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithoutUsedStudentsDataInput {
@@ -8739,6 +8811,7 @@ input SequenceUpdateWithoutUsedStudentsDataInput {
   usedPanels: PanelUpdateManyWithoutUsedSequenceInput
   students: UserUpdateManyWithoutTestSequenceInput
   panels: PanelUpdateManyWithoutSequencesInput
+  testCycles: TestUpdateOneWithoutSequenceCyclesInput
 }
 
 input SequenceUpdateWithWhereUniqueWithoutAddedByInput {
@@ -8764,6 +8837,11 @@ input SequenceUpdateWithWhereUniqueWithoutSentToInput {
 input SequenceUpdateWithWhereUniqueWithoutStudentsInput {
   where: SequenceWhereUniqueInput!
   data: SequenceUpdateWithoutStudentsDataInput!
+}
+
+input SequenceUpdateWithWhereUniqueWithoutTestCyclesInput {
+  where: SequenceWhereUniqueInput!
+  data: SequenceUpdateWithoutTestCyclesDataInput!
 }
 
 input SequenceUpdateWithWhereUniqueWithoutUsedPanelsInput {
@@ -8809,6 +8887,12 @@ input SequenceUpsertWithWhereUniqueWithoutStudentsInput {
   where: SequenceWhereUniqueInput!
   update: SequenceUpdateWithoutStudentsDataInput!
   create: SequenceCreateWithoutStudentsInput!
+}
+
+input SequenceUpsertWithWhereUniqueWithoutTestCyclesInput {
+  where: SequenceWhereUniqueInput!
+  update: SequenceUpdateWithoutTestCyclesDataInput!
+  create: SequenceCreateWithoutTestCyclesInput!
 }
 
 input SequenceUpsertWithWhereUniqueWithoutUsedPanelsInput {
@@ -9012,6 +9096,7 @@ input SequenceWhereInput {
   panels_every: PanelWhereInput
   panels_some: PanelWhereInput
   panels_none: PanelWhereInput
+  testCycles: TestWhereInput
 }
 
 input SequenceWhereUniqueInput {
@@ -9056,6 +9141,7 @@ type Test implements Node {
   panels(where: PanelWhereInput, orderBy: PanelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Panel!]
   questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question!]
   sequences: Sequence
+  sequenceCycles(where: SequenceWhereInput, orderBy: SequenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sequence!]
 }
 
 """A connection to a list of items."""
@@ -9088,6 +9174,7 @@ input TestCreateInput {
   panels: PanelCreateManyWithoutTestInput
   questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 input TestCreateManyWithoutAddedByInput {
@@ -9115,6 +9202,11 @@ input TestCreateOneWithoutQuestionsInput {
   connect: TestWhereUniqueInput
 }
 
+input TestCreateOneWithoutSequenceCyclesInput {
+  create: TestCreateWithoutSequenceCyclesInput
+  connect: TestWhereUniqueInput
+}
+
 input TestCreateOneWithoutSequencesInput {
   create: TestCreateWithoutSequencesInput
   connect: TestWhereUniqueInput
@@ -9139,6 +9231,7 @@ input TestCreateWithoutAddedByInput {
   panels: PanelCreateManyWithoutTestInput
   questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 input TestCreateWithoutCourseInput {
@@ -9160,6 +9253,7 @@ input TestCreateWithoutCourseInput {
   panels: PanelCreateManyWithoutTestInput
   questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 input TestCreateWithoutPanelsInput {
@@ -9181,6 +9275,7 @@ input TestCreateWithoutPanelsInput {
   course: CourseCreateOneWithoutTestsInput!
   questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 input TestCreateWithoutQuestionsInput {
@@ -9201,6 +9296,29 @@ input TestCreateWithoutQuestionsInput {
   updatedBy: UserCreateOneWithoutTestUpdatesInput
   course: CourseCreateOneWithoutTestsInput!
   panels: PanelCreateManyWithoutTestInput
+  sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
+}
+
+input TestCreateWithoutSequenceCyclesInput {
+  addedDate: DateTime
+  updateDate: DateTime
+  subject: String!
+  testNumber: String
+  testDate: DateTime
+  published: Boolean
+  publishDate: DateTime
+  release: Boolean
+  releaseDate: DateTime
+  startTime: String
+  endTime: String
+  endDate: DateTime
+  deleted: Boolean
+  addedBy: UserCreateOneWithoutTestsAddedInput!
+  updatedBy: UserCreateOneWithoutTestUpdatesInput
+  course: CourseCreateOneWithoutTestsInput!
+  panels: PanelCreateManyWithoutTestInput
+  questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
 }
 
@@ -9223,6 +9341,7 @@ input TestCreateWithoutSequencesInput {
   course: CourseCreateOneWithoutTestsInput!
   panels: PanelCreateManyWithoutTestInput
   questions: QuestionCreateManyWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 input TestCreateWithoutUpdatedByInput {
@@ -9244,6 +9363,7 @@ input TestCreateWithoutUpdatedByInput {
   panels: PanelCreateManyWithoutTestInput
   questions: QuestionCreateManyWithoutTestInput
   sequences: SequenceCreateOneWithoutTestInput
+  sequenceCycles: SequenceCreateManyWithoutTestCyclesInput
 }
 
 """An edge in a connection."""
@@ -9721,6 +9841,7 @@ input TestUpdateInput {
   panels: PanelUpdateManyWithoutTestInput
   questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateManyDataInput {
@@ -9814,6 +9935,15 @@ input TestUpdateOneRequiredWithoutSequencesInput {
   upsert: TestUpsertWithoutSequencesInput
 }
 
+input TestUpdateOneWithoutSequenceCyclesInput {
+  create: TestCreateWithoutSequenceCyclesInput
+  connect: TestWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: TestUpdateWithoutSequenceCyclesDataInput
+  upsert: TestUpsertWithoutSequenceCyclesInput
+}
+
 input TestUpdateWithoutAddedByDataInput {
   addedDate: DateTime
   updateDate: DateTime
@@ -9833,6 +9963,7 @@ input TestUpdateWithoutAddedByDataInput {
   panels: PanelUpdateManyWithoutTestInput
   questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateWithoutCourseDataInput {
@@ -9854,6 +9985,7 @@ input TestUpdateWithoutCourseDataInput {
   panels: PanelUpdateManyWithoutTestInput
   questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateWithoutPanelsDataInput {
@@ -9875,6 +10007,7 @@ input TestUpdateWithoutPanelsDataInput {
   course: CourseUpdateOneRequiredWithoutTestsInput
   questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateWithoutQuestionsDataInput {
@@ -9895,6 +10028,29 @@ input TestUpdateWithoutQuestionsDataInput {
   updatedBy: UserUpdateOneWithoutTestUpdatesInput
   course: CourseUpdateOneRequiredWithoutTestsInput
   panels: PanelUpdateManyWithoutTestInput
+  sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
+}
+
+input TestUpdateWithoutSequenceCyclesDataInput {
+  addedDate: DateTime
+  updateDate: DateTime
+  subject: String
+  testNumber: String
+  testDate: DateTime
+  published: Boolean
+  publishDate: DateTime
+  release: Boolean
+  releaseDate: DateTime
+  startTime: String
+  endTime: String
+  endDate: DateTime
+  deleted: Boolean
+  addedBy: UserUpdateOneRequiredWithoutTestsAddedInput
+  updatedBy: UserUpdateOneWithoutTestUpdatesInput
+  course: CourseUpdateOneRequiredWithoutTestsInput
+  panels: PanelUpdateManyWithoutTestInput
+  questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
 }
 
@@ -9917,6 +10073,7 @@ input TestUpdateWithoutSequencesDataInput {
   course: CourseUpdateOneRequiredWithoutTestsInput
   panels: PanelUpdateManyWithoutTestInput
   questions: QuestionUpdateManyWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateWithoutUpdatedByDataInput {
@@ -9938,6 +10095,7 @@ input TestUpdateWithoutUpdatedByDataInput {
   panels: PanelUpdateManyWithoutTestInput
   questions: QuestionUpdateManyWithoutTestInput
   sequences: SequenceUpdateOneWithoutTestInput
+  sequenceCycles: SequenceUpdateManyWithoutTestCyclesInput
 }
 
 input TestUpdateWithWhereUniqueWithoutAddedByInput {
@@ -9963,6 +10121,11 @@ input TestUpsertWithoutPanelsInput {
 input TestUpsertWithoutQuestionsInput {
   update: TestUpdateWithoutQuestionsDataInput!
   create: TestCreateWithoutQuestionsInput!
+}
+
+input TestUpsertWithoutSequenceCyclesInput {
+  update: TestUpdateWithoutSequenceCyclesDataInput!
+  create: TestCreateWithoutSequenceCyclesInput!
 }
 
 input TestUpsertWithoutSequencesInput {
@@ -10351,6 +10514,9 @@ input TestWhereInput {
   questions_some: QuestionWhereInput
   questions_none: QuestionWhereInput
   sequences: SequenceWhereInput
+  sequenceCycles_every: SequenceWhereInput
+  sequenceCycles_some: SequenceWhereInput
+  sequenceCycles_none: SequenceWhereInput
 }
 
 input TestWhereUniqueInput {

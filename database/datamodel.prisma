@@ -130,6 +130,7 @@ type Test {
   panels: [Panel!]! @relation(name: "PanelsByTest" onDelete: CASCADE)
   questions: [Question!]! @relation(name: "QuestionsByTest" onDelete: CASCADE)
   sequences: Sequence @relation(name: "SequencesByTest" onDelete: CASCADE)
+  sequenceCycles: [Sequence] @relation(name: "SequenceCyclesByTest" onDelete: CASCADE)
 }
 
 type Panel {
@@ -251,4 +252,5 @@ type Sequence {
   pans: [String!]!
   usedstuds: [String!]!
   usedpans: [String!]!
+  testCycles: Test @relation(name: "SequenceCyclesByTest" onDelete: CASCADE)
 }
