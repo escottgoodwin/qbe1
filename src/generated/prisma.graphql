@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Mon Apr 22 2019 15:11:58 GMT-0700 (Pacific Daylight Time)
+# timestamp: Thu Apr 25 2019 13:33:45 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -3749,6 +3749,7 @@ type Institution implements Node {
   id: ID!
   name: String!
   type: String
+  deleted: Boolean
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   admins(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   teachers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -3774,6 +3775,7 @@ type InstitutionConnection {
 input InstitutionCreateInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3834,6 +3836,7 @@ input InstitutionCreateOneWithoutUsersInput {
 input InstitutionCreateWithoutAddedByInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3848,6 +3851,7 @@ input InstitutionCreateWithoutAddedByInput {
 input InstitutionCreateWithoutAdminsInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3862,6 +3866,7 @@ input InstitutionCreateWithoutAdminsInput {
 input InstitutionCreateWithoutContactsInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3876,6 +3881,7 @@ input InstitutionCreateWithoutContactsInput {
 input InstitutionCreateWithoutCoursesInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3890,6 +3896,7 @@ input InstitutionCreateWithoutCoursesInput {
 input InstitutionCreateWithoutStudentsInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3904,6 +3911,7 @@ input InstitutionCreateWithoutStudentsInput {
 input InstitutionCreateWithoutTeachersInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3918,6 +3926,7 @@ input InstitutionCreateWithoutTeachersInput {
 input InstitutionCreateWithoutUpdatedByInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserCreateManyWithoutInstitutionInput
@@ -3932,6 +3941,7 @@ input InstitutionCreateWithoutUpdatedByInput {
 input InstitutionCreateWithoutUsersInput {
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   admins: UserCreateManyWithoutAdminInstitutionsInput
@@ -3959,6 +3969,8 @@ enum InstitutionOrderByInput {
   name_DESC
   type_ASC
   type_DESC
+  deleted_ASC
+  deleted_DESC
   addedDate_ASC
   addedDate_DESC
   updateDate_ASC
@@ -3973,6 +3985,7 @@ type InstitutionPreviousValues {
   id: ID!
   name: String!
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
 }
@@ -4106,6 +4119,10 @@ input InstitutionScalarWhereInput {
 
   """All values not ending with the given string."""
   type_not_ends_with: String
+  deleted: Boolean
+
+  """All values that are not equal to given value."""
+  deleted_not: Boolean
   addedDate: DateTime
 
   """All values that are not equal to given value."""
@@ -4194,6 +4211,7 @@ input InstitutionSubscriptionWhereInput {
 input InstitutionUpdateDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4209,6 +4227,7 @@ input InstitutionUpdateDataInput {
 input InstitutionUpdateInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4224,6 +4243,7 @@ input InstitutionUpdateInput {
 input InstitutionUpdateManyDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
 }
@@ -4231,6 +4251,7 @@ input InstitutionUpdateManyDataInput {
 input InstitutionUpdateManyMutationInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
 }
@@ -4334,6 +4355,7 @@ input InstitutionUpdateOneWithoutUsersInput {
 input InstitutionUpdateWithoutAddedByDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4348,6 +4370,7 @@ input InstitutionUpdateWithoutAddedByDataInput {
 input InstitutionUpdateWithoutAdminsDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4362,6 +4385,7 @@ input InstitutionUpdateWithoutAdminsDataInput {
 input InstitutionUpdateWithoutContactsDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4376,6 +4400,7 @@ input InstitutionUpdateWithoutContactsDataInput {
 input InstitutionUpdateWithoutCoursesDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4390,6 +4415,7 @@ input InstitutionUpdateWithoutCoursesDataInput {
 input InstitutionUpdateWithoutStudentsDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4404,6 +4430,7 @@ input InstitutionUpdateWithoutStudentsDataInput {
 input InstitutionUpdateWithoutTeachersDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4418,6 +4445,7 @@ input InstitutionUpdateWithoutTeachersDataInput {
 input InstitutionUpdateWithoutUpdatedByDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   users: UserUpdateManyWithoutInstitutionInput
@@ -4432,6 +4460,7 @@ input InstitutionUpdateWithoutUpdatedByDataInput {
 input InstitutionUpdateWithoutUsersDataInput {
   name: String
   type: String
+  deleted: Boolean
   addedDate: DateTime
   updateDate: DateTime
   admins: UserUpdateManyWithoutAdminInstitutionsInput
@@ -4653,6 +4682,10 @@ input InstitutionWhereInput {
 
   """All values not ending with the given string."""
   type_not_ends_with: String
+  deleted: Boolean
+
+  """All values that are not equal to given value."""
+  deleted_not: Boolean
   addedDate: DateTime
 
   """All values that are not equal to given value."""

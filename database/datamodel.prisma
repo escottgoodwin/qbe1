@@ -68,6 +68,7 @@ type Institution {
   id: ID! @unique
   name: String!
   type: String
+  deleted: Boolean
   users: [User!]! @relation(name: "UsersByInstitution")
   admins: [User!]! @relation(name: "AdminsByInstitutions")
   teachers: [User!]! @relation(name: "TeachersByInstitutions")
