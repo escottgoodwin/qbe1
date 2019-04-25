@@ -5,6 +5,11 @@ enum UserType {
   QUANDRIA
 }
 
+enum TestType {
+  LAB
+  CLASS
+}
+
 type User {
   id: ID! @unique
   email: String! @unique
@@ -119,6 +124,7 @@ type Test {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean

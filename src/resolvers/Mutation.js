@@ -609,7 +609,7 @@ async function addInstitution(parent, { name, type }, ctx, info) {
 
 }
 
-async function updateInstitution(parent, { id, name, type, contactIds, teacherIds, studentIds, adminIds, courseIds }, ctx, info) {
+async function updateInstitution(parent, { id, name, type, deleted, contactIds, teacherIds, studentIds, adminIds, courseIds }, ctx, info) {
   const userId = await getUserId(ctx)
   const updateDate = new Date()
 
@@ -634,6 +634,7 @@ async function updateInstitution(parent, { id, name, type, contactIds, teacherId
             updatedBy: {
               connect: { id: userId  }
             },
+            deleted,
             contacts,
             teachers,
             students,

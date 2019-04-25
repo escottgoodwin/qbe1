@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Thu Apr 25 2019 13:33:45 GMT-0700 (Pacific Daylight Time)
+# timestamp: Thu Apr 25 2019 13:42:07 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -9162,6 +9162,7 @@ type Test implements Node {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9193,6 +9194,7 @@ input TestCreateInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9251,6 +9253,7 @@ input TestCreateWithoutAddedByInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9273,6 +9276,7 @@ input TestCreateWithoutCourseInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9295,6 +9299,7 @@ input TestCreateWithoutPanelsInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9317,6 +9322,7 @@ input TestCreateWithoutQuestionsInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9339,6 +9345,7 @@ input TestCreateWithoutSequenceCyclesInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9361,6 +9368,7 @@ input TestCreateWithoutSequencesInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9383,6 +9391,7 @@ input TestCreateWithoutUpdatedByInput {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9421,6 +9430,8 @@ enum TestOrderByInput {
   testNumber_DESC
   testDate_ASC
   testDate_DESC
+  testType_ASC
+  testType_DESC
   published_ASC
   published_DESC
   publishDate_ASC
@@ -9450,6 +9461,7 @@ type TestPreviousValues {
   subject: String!
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9655,6 +9667,16 @@ input TestScalarWhereInput {
 
   """All values greater than or equal the given value."""
   testDate_gte: DateTime
+  testType: TestType
+
+  """All values that are not equal to given value."""
+  testType_not: TestType
+
+  """All values that are contained in given list."""
+  testType_in: [TestType!]
+
+  """All values that are not contained in given list."""
+  testType_not_in: [TestType!]
   published: Boolean
 
   """All values that are not equal to given value."""
@@ -9854,12 +9876,18 @@ input TestSubscriptionWhereInput {
   node: TestWhereInput
 }
 
+enum TestType {
+  LAB
+  CLASS
+}
+
 input TestUpdateInput {
   addedDate: DateTime
   updateDate: DateTime
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9883,6 +9911,7 @@ input TestUpdateManyDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9899,6 +9928,7 @@ input TestUpdateManyMutationInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -9983,6 +10013,7 @@ input TestUpdateWithoutAddedByDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10005,6 +10036,7 @@ input TestUpdateWithoutCourseDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10027,6 +10059,7 @@ input TestUpdateWithoutPanelsDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10049,6 +10082,7 @@ input TestUpdateWithoutQuestionsDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10071,6 +10105,7 @@ input TestUpdateWithoutSequenceCyclesDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10093,6 +10128,7 @@ input TestUpdateWithoutSequencesDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10115,6 +10151,7 @@ input TestUpdateWithoutUpdatedByDataInput {
   subject: String
   testNumber: String
   testDate: DateTime
+  testType: TestType
   published: Boolean
   publishDate: DateTime
   release: Boolean
@@ -10379,6 +10416,16 @@ input TestWhereInput {
 
   """All values greater than or equal the given value."""
   testDate_gte: DateTime
+  testType: TestType
+
+  """All values that are not equal to given value."""
+  testType_not: TestType
+
+  """All values that are contained in given list."""
+  testType_in: [TestType!]
+
+  """All values that are not contained in given list."""
+  testType_not_in: [TestType!]
   published: Boolean
 
   """All values that are not equal to given value."""
