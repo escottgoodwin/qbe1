@@ -3,6 +3,11 @@
 directive @isAuthenticated on QUERY | FIELD_DEFINITION  | MUTATION
 directive @hasRole(roles: [String]) on QUERY | FIELD_DEFINITION  | MUTATION
 
+enum TestType {
+  LAB
+  CLASS
+}
+
 type Query {
 
   articleRecommendations(transLang: String!, link: String!): ArticleRecommendations!
@@ -104,7 +109,7 @@ type Mutation {
 
   addTest(subject: String!, testNumber: String, testDate: DateTime, deleted: Boolean, courseId: ID!): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 
-  updateTest(id: ID!, subject: String, testNumber: String, testDate: DateTime, testType: String, published: Boolean, publishDate: DateTime, release: Boolean, releaseDate: DateTime, deleted: Boolean): Test! @hasRole(roles: ["TEACHER","ADMIN"])
+  updateTest(id: ID!, subject: String, testNumber: String, testDate: DateTime, testType: TestType, published: Boolean, publishDate: DateTime, release: Boolean, releaseDate: DateTime, deleted: Boolean): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 
   deleteTest(id: ID!): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 

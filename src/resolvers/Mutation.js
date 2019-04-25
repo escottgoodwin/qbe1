@@ -620,10 +620,10 @@ async function updateInstitution(parent, { id, name, type, deleted, contactIds, 
   const admins = await checkField(adminIds)
 
 
-  const course = await ctx.db.query.institution({where: { id: id } },`{ admins { id } }`)
-  const institutionAdmins = JSON.stringify(course.admins)
+  //const course = await ctx.db.query.institution({where: { id: id } },`{ admins { id } }`)
+  //const institutionAdmins = JSON.stringify(course.admins)
 
-  if (institutionAdmins.includes(userId)){
+  //if (institutionAdmins.includes(userId)){
 
       return await ctx.db.mutation.updateInstitution(
         {
@@ -647,7 +647,7 @@ async function updateInstitution(parent, { id, name, type, deleted, contactIds, 
         },
         info
       )
-  }
+  //}
 }
 
 async function deleteInstitution(parent, { id }, ctx, info) {
