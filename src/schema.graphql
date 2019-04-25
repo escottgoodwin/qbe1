@@ -92,7 +92,7 @@ type Mutation {
 
   addInstitution(name: String!, type: String, contactIds: ID, teacherIds: [ID], studentIds: [ID], courseIds: [ID]): Institution ! @hasRole(roles: ["QUANDRIA"])
 
-  updateInstitution(id: ID!, name: String, type: String, contactIds: [ID], teacherIds: [ID], studentIds: [ID], adminIds: [ID] courseIds: [ID]): Institution! @hasRole(roles: ["QUANDRIA","ADMIN"])
+  updateInstitution(id: ID!, name: String, type: String, deleted: Boolean, contactIds: [ID], teacherIds: [ID], studentIds: [ID], adminIds: [ID] courseIds: [ID]): Institution! @hasRole(roles: ["QUANDRIA","ADMIN"])
 
   deleteInstitution(id: ID!): Institution! @hasRole(roles: ["QUANDRIA"])
 
@@ -104,7 +104,7 @@ type Mutation {
 
   addTest(subject: String!, testNumber: String, testDate: DateTime, deleted: Boolean, courseId: ID!): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 
-  updateTest(id: ID!, subject: String, testNumber: String, testDate: DateTime, published: Boolean, publishDate: DateTime, release: Boolean, releaseDate: DateTime, deleted: Boolean): Test! @hasRole(roles: ["TEACHER","ADMIN"])
+  updateTest(id: ID!, subject: String, testNumber: String, testDate: DateTime, testType: String, published: Boolean, publishDate: DateTime, release: Boolean, releaseDate: DateTime, deleted: Boolean): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 
   deleteTest(id: ID!): Test! @hasRole(roles: ["TEACHER","ADMIN"])
 
