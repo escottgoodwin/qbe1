@@ -79,7 +79,11 @@ type Query {
 
 type Mutation {
 
-  signup(email: String!, password: String!, firstName: String!,lastName: String!, role: String, institution: ID): signUpPayload
+  signup(email: String!, password: String!, firstName: String!,lastName: String!, role: String): signUpPayload
+
+  signupAdmin(email: String!, password: String!, firstName: String!,lastName: String!, role: String, institutionId: ID): signUpPayload
+
+  signupTeacher(email: String!, password: String!, firstName: String!,lastName: String!, role: String, institutionId: ID): signUpPayload
 
   login(email: String!, password: String!): AuthPayload
 

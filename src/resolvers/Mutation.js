@@ -80,14 +80,17 @@ async function signup(parent, args, ctx, info) {
           },
   }, `{ id firstName lastName email role confirmed }`)
 
+  const {firstName, lastName, email, role, confirmed} = user
+
   const htmlEmail =
     `<html>
     <head>
       <title>Confirm your email address</title>
     </head>
     <body>
-      <p>Hi ${ user.firstName} ${ user.lastName },</p>
-      <p><a href="${ hosturl }/confirm/${confirmationToken}/${user.email}">Click here to confirm your email address.</a></p>
+      <p>Hi ${ firstName} ${ lastName },</p>
+      <p>You have signed up for Quandrio</p>
+      <p><a href="${ hosturl }/confirm/${confirmationToken}/${email}">Click here to confirm your email address.</a></p>
       <p>This token will expire in 2 hours.</p>
     </body>
     </html>`
@@ -95,14 +98,137 @@ async function signup(parent, args, ctx, info) {
   const msg = {
     to: args.email,
     subject: 'Confirm your email address',
-    text: `Click on this link to resent your password ${ hosturl }/confirm?${confirmationToken}&${user.email} This token will expire in 2 hours.`,
+    text: `Click on this link to resend your password ${ hosturl }/confirm?${confirmationToken}&${user.email} This token will expire in 2 hours.`,
     html: htmlEmail,
   };
 
   sendGridSend(msg)
 
+  const signUpRequestMsg = firstName + ' ' + lastName + ', thank you for signing up. We will send you an email confirmation. Once you confirm your email address, you will be able to login.'
 
-  signUpRequestMsg = user.firstName + ' ' + user.lastName + ', thank you for signing up. We will send you an email confirmation. Once you confirm your email address, you will be able to login.'
+  return {
+    authMsg: signUpRequestMsg,
+    user
+  }
+
+}
+
+async function signupAdmin(parent, args, ctx, info) {
+
+  const signUpDate = new Date()
+
+  const password = await bcrypt.hash(args.password, 10)
+
+  const confirmationToken = await crypto.randomBytes(20).toString('hex')
+  const tokenExpirationTime = signUpDate
+  tokenExpirationTime.setHours(signUpDate.getHours() + 2);
+
+  const user = await ctx.db.mutation.createUser({
+    data: {
+          firstName: args.firstName,
+          lastName: args.lastName,
+          email: args.email,
+          role: args.role,
+          adminInstitutions: {
+            connect: {
+              id: args.institutionId
+            }
+          },
+          password,
+          signUpDate,
+          confirmationToken,
+          tokenExpirationTime,
+          },
+  }, `{ id firstName lastName email role confirmed adminInstitutions { name } }`)
+
+  const {firstName, lastName, email, role, confirmed, adminInstitutions} = user
+  const institutionName = adminInstitutions[adminInstitutions.length-1].name
+
+  const htmlEmail =
+    `<html>
+    <head>
+      <title>Confirm your email address</title>
+    </head>
+    <body>
+      <p>Hi ${ firstName} ${ lastName },</p>
+      <p>You have been added as an Administrator for ${institutionName}</p>
+      <p><a href="${ hosturl }/confirm/${confirmationToken}/${email}">Click here to confirm your email address.</a></p>
+      <p>This token will expire in 2 hours.</p>
+    </body>
+    </html>`
+
+  const msg = {
+    to: args.email,
+    subject: 'Confirm your email address',
+    text: `Click on this link to resend your password ${ hosturl }/confirm?${confirmationToken}&${email} This token will expire in 2 hours.`,
+    html: htmlEmail,
+  };
+
+  sendGridSend(msg)
+
+  const signUpRequestMsg = `You have added ${firstName} ${lastName} as an administrator for ${institutionName}. We will send them an email confirmation. Once they confirm their email address, they will be able to login.`
+
+  return {
+    authMsg: signUpRequestMsg,
+    user
+  }
+
+}
+
+async function signupTeacher(parent, args, ctx, info) {
+
+  const signUpDate = new Date()
+
+  const password = await bcrypt.hash(args.password, 10)
+
+  const confirmationToken = await crypto.randomBytes(20).toString('hex')
+  const tokenExpirationTime = signUpDate
+  tokenExpirationTime.setHours(signUpDate.getHours() + 2);
+
+  const user = await ctx.db.mutation.createUser({
+    data: {
+          firstName: args.firstName,
+          lastName: args.lastName,
+          email: args.email,
+          role: args.role,
+          teacherInstitutions: {
+            connect: {
+              id: args.institutionId
+            }
+          },
+          password,
+          signUpDate,
+          confirmationToken,
+          tokenExpirationTime,
+          },
+  }, `{ id firstName lastName email role confirmed teacherInstitutions { name } }`)
+
+  const {firstName, lastName, email, role, confirmed, teacherInstitutions} = user
+  const institutionName = teacherInstitutions[teacherInstitutions.length-1].name
+
+  const htmlEmail =
+    `<html>
+    <head>
+      <title>Confirm your email address</title>
+    </head>
+    <body>
+      <p>Hi ${ firstName} ${ lastName },</p>
+      <p>You have been added as a Teacher for ${institutionName}</p>
+      <p><a href="${ hosturl }/confirm/${confirmationToken}/${email}">Click here to confirm your email address.</a></p>
+      <p>This token will expire in 2 hours.</p>
+    </body>
+    </html>`
+
+  const msg = {
+    to: args.email,
+    subject: 'Confirm your email address',
+    text: `Click on this link to resend your password ${ hosturl }/confirm?${confirmationToken}&${email} This token will expire in 2 hours.`,
+    html: htmlEmail,
+  };
+
+  sendGridSend(msg)
+
+  const signUpRequestMsg = `You have added ${firstName} ${lastName} as a teacher for ${institutionName}. We will send them an email confirmation. Once they confirm their email address, they will be able to login.`
 
   return {
     authMsg: signUpRequestMsg,
@@ -1824,6 +1950,8 @@ async function updateUser(parent,  {
 
 module.exports = {
   signup,
+  signupAdmin,
+  signupTeacher,
   newPasswordRequest,
   resetPassword,
   confirmEmail,
