@@ -81,9 +81,9 @@ type Mutation {
 
   signup(email: String!, password: String!, firstName: String!,lastName: String!, role: String): signUpPayload
 
-  signupAdmin(email: String!, password: String!, firstName: String!,lastName: String!, role: String, institutionId: ID): signUpPayload
+  signupAdmin(email: String!, password: String!, firstName: String!,lastName: String!, title: String,  department: String,  address1: String,  address2: String,  city: String, state: String, zip: String, phone: String, role: String, institutionId: ID): signUpPayload
 
-  signupTeacher(email: String!, password: String!, firstName: String!,lastName: String!, role: String, institutionId: ID): signUpPayload
+  signupTeacher(email: String!, password: String!, firstName: String!,lastName: String!, department: String,  address1: String,  address2: String,  city: String, state: String, zip: String, phone: String, role: String, institutionId: ID): signUpPayload
 
   login(email: String!, password: String!): AuthPayload
 
@@ -99,9 +99,9 @@ type Mutation {
 
   sendInvite(emails: String, courseId: ID!): signUpPayload
 
-  addInstitution(name: String!, type: String, contactIds: ID, teacherIds: [ID], studentIds: [ID], courseIds: [ID]): Institution ! @hasRole(roles: ["QUANDRIA"])
+  addInstitution(name: String!, address1: String,  address2: String,  city: String,  state: String,  zip: String,  phone: String,  email: String, type: String, contactIds: ID, teacherIds: [ID], studentIds: [ID], courseIds: [ID]): Institution ! @hasRole(roles: ["QUANDRIA"])
 
-  updateInstitution(id: ID!, name: String, type: String, deleted: Boolean, contactIds: [ID], teacherIds: [ID], studentIds: [ID], adminIds: [ID] courseIds: [ID]): Institution! @hasRole(roles: ["QUANDRIA","ADMIN"])
+  updateInstitution(id: ID!, name: String, address1: String,  address2: String,  city: String,  state: String,  zip: String,  phone: String,  email: String, type: String, deleted: Boolean, contactIds: [ID], teacherIds: [ID], studentIds: [ID], adminIds: [ID] courseIds: [ID]): Institution! @hasRole(roles: ["QUANDRIA","ADMIN"])
 
   deleteInstitution(id: ID!): Institution! @hasRole(roles: ["QUANDRIA"])
 
@@ -175,7 +175,7 @@ type Mutation {
 
   joinCourse(inviteId: ID!,courseId: ID!): JoinCourse
 
-  updateUser(email: String, salutation: String, firstName: String, lastName: String, pushToken: String, adminInstitutions: [ID], teacherInstitutions: [ID], studentInstitutions: [ID], studentCourseIds:[ID], studentIds:[String], teacherIds: [String], phone: String, online: Boolean, touchIdEnabled: Boolean): User!
+  updateUser(email: String, salutation: String, firstName: String, lastName: String, title: String,  department: String,  address1: String,  address2: String,  city: String, state: String, zip: String, phone: String, role: String, pushToken: String, adminInstitutions: [ID], teacherInstitutions: [ID], studentInstitutions: [ID], studentCourseIds:[ID], studentIds:[String], teacherIds: [String], online: Boolean, touchIdEnabled: Boolean): User!
 }
 
 type Subscription {

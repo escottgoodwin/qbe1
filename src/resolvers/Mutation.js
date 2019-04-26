@@ -190,6 +190,14 @@ async function signupTeacher(parent, args, ctx, info) {
           firstName: args.firstName,
           lastName: args.lastName,
           email: args.email,
+          title: args.title,
+          department: args.department,
+          address1: args.address1,
+          address2: args.address2,
+          city: args.city,
+          state: args.state,
+          zip: args.zip,
+          phone: args.phone,
           role: args.role,
           teacherInstitutions: {
             connect: {
@@ -715,15 +723,22 @@ async function logout(parent, args, ctx, info) {
   }
 }
 
-async function addInstitution(parent, { name, type }, ctx, info) {
+async function addInstitution(parent, args, ctx, info) {
   const userId = await getUserId(ctx)
   const addedDate = new Date()
 
   return await ctx.db.mutation.createInstitution(
     {
       data: {
-        name,
-        type,
+        name: args.name,
+        address1: args.address1,
+        address2: args.address2,
+        city: args.city,
+        state: args.state,
+        zip: args.zip,
+        phone: args.phone,
+        email: args.email,
+        type:args.type,
         addedDate,
         addedBy: {
           connect: { id: userId },
@@ -735,15 +750,15 @@ async function addInstitution(parent, { name, type }, ctx, info) {
 
 }
 
-async function updateInstitution(parent, { id, name, type, deleted, contactIds, teacherIds, studentIds, adminIds, courseIds }, ctx, info) {
+async function updateInstitution(parent, args, ctx, info) {
   const userId = await getUserId(ctx)
   const updateDate = new Date()
 
-  const contacts = await checkField(contactIds)
-  const teachers = await checkField(teacherIds)
-  const courses = await checkField(courseIds)
-  const students = await checkField(studentIds)
-  const admins = await checkField(adminIds)
+  const contacts = await checkField(args.contactIds)
+  const teachers = await checkField(args.teacherIds)
+  const courses = await checkField(args.courseIds)
+  const students = await checkField(args.studentIds)
+  const admins = await checkField(args.adminIds)
 
 
   //const course = await ctx.db.query.institution({where: { id: id } },`{ admins { id } }`)
@@ -754,8 +769,13 @@ async function updateInstitution(parent, { id, name, type, deleted, contactIds, 
       return await ctx.db.mutation.updateInstitution(
         {
           data: {
-            name,
-            type,
+            address1: args.address1,
+            address2: args.address2,
+            city: args.city,
+            state: args.state,
+            zip: args.zip,
+            phone: args.phone,
+            email: args.email,
             updateDate,
             updatedBy: {
               connect: { id: userId  }
@@ -1926,6 +1946,13 @@ async function updateUser(parent,  {
         salutation,
         firstName,
         lastName,
+        address1: args.address1,
+        address2: args.address2,
+        city: args.city,
+        state: args.state,
+        zip: args.zip,
+        phone: args.phone,
+        role: args.role,
         pushToken,
         studentCourses,
         adminInstitutions: adminInstitutions1,
@@ -1933,7 +1960,6 @@ async function updateUser(parent,  {
         studentInstitutions: studentInstitutions1,
         studentIds,
         teacherIds,
-        phone,
         online,
         touchIdEnabled,
         updateDate
