@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Thu Apr 25 2019 13:42:07 GMT-0700 (Pacific Daylight Time)
+# timestamp: Fri Apr 26 2019 15:39:53 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -3748,6 +3748,13 @@ scalar DateTime
 type Institution implements Node {
   id: ID!
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -3774,6 +3781,13 @@ type InstitutionConnection {
 
 input InstitutionCreateInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3835,6 +3849,13 @@ input InstitutionCreateOneWithoutUsersInput {
 
 input InstitutionCreateWithoutAddedByInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3850,6 +3871,13 @@ input InstitutionCreateWithoutAddedByInput {
 
 input InstitutionCreateWithoutAdminsInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3865,6 +3893,13 @@ input InstitutionCreateWithoutAdminsInput {
 
 input InstitutionCreateWithoutContactsInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3880,6 +3915,13 @@ input InstitutionCreateWithoutContactsInput {
 
 input InstitutionCreateWithoutCoursesInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3895,6 +3937,13 @@ input InstitutionCreateWithoutCoursesInput {
 
 input InstitutionCreateWithoutStudentsInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3910,6 +3959,13 @@ input InstitutionCreateWithoutStudentsInput {
 
 input InstitutionCreateWithoutTeachersInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3925,6 +3981,13 @@ input InstitutionCreateWithoutTeachersInput {
 
 input InstitutionCreateWithoutUpdatedByInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3940,6 +4003,13 @@ input InstitutionCreateWithoutUpdatedByInput {
 
 input InstitutionCreateWithoutUsersInput {
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -3967,6 +4037,20 @@ enum InstitutionOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  address1_ASC
+  address1_DESC
+  address2_ASC
+  address2_DESC
+  city_ASC
+  city_DESC
+  state_ASC
+  state_DESC
+  zip_ASC
+  zip_DESC
+  phone_ASC
+  phone_DESC
+  email_ASC
+  email_DESC
   type_ASC
   type_DESC
   deleted_ASC
@@ -3984,6 +4068,13 @@ enum InstitutionOrderByInput {
 type InstitutionPreviousValues {
   id: ID!
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4079,6 +4170,286 @@ input InstitutionScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  address1: String
+
+  """All values that are not equal to given value."""
+  address1_not: String
+
+  """All values that are contained in given list."""
+  address1_in: [String!]
+
+  """All values that are not contained in given list."""
+  address1_not_in: [String!]
+
+  """All values less than the given value."""
+  address1_lt: String
+
+  """All values less than or equal the given value."""
+  address1_lte: String
+
+  """All values greater than the given value."""
+  address1_gt: String
+
+  """All values greater than or equal the given value."""
+  address1_gte: String
+
+  """All values containing the given string."""
+  address1_contains: String
+
+  """All values not containing the given string."""
+  address1_not_contains: String
+
+  """All values starting with the given string."""
+  address1_starts_with: String
+
+  """All values not starting with the given string."""
+  address1_not_starts_with: String
+
+  """All values ending with the given string."""
+  address1_ends_with: String
+
+  """All values not ending with the given string."""
+  address1_not_ends_with: String
+  address2: String
+
+  """All values that are not equal to given value."""
+  address2_not: String
+
+  """All values that are contained in given list."""
+  address2_in: [String!]
+
+  """All values that are not contained in given list."""
+  address2_not_in: [String!]
+
+  """All values less than the given value."""
+  address2_lt: String
+
+  """All values less than or equal the given value."""
+  address2_lte: String
+
+  """All values greater than the given value."""
+  address2_gt: String
+
+  """All values greater than or equal the given value."""
+  address2_gte: String
+
+  """All values containing the given string."""
+  address2_contains: String
+
+  """All values not containing the given string."""
+  address2_not_contains: String
+
+  """All values starting with the given string."""
+  address2_starts_with: String
+
+  """All values not starting with the given string."""
+  address2_not_starts_with: String
+
+  """All values ending with the given string."""
+  address2_ends_with: String
+
+  """All values not ending with the given string."""
+  address2_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  state: String
+
+  """All values that are not equal to given value."""
+  state_not: String
+
+  """All values that are contained in given list."""
+  state_in: [String!]
+
+  """All values that are not contained in given list."""
+  state_not_in: [String!]
+
+  """All values less than the given value."""
+  state_lt: String
+
+  """All values less than or equal the given value."""
+  state_lte: String
+
+  """All values greater than the given value."""
+  state_gt: String
+
+  """All values greater than or equal the given value."""
+  state_gte: String
+
+  """All values containing the given string."""
+  state_contains: String
+
+  """All values not containing the given string."""
+  state_not_contains: String
+
+  """All values starting with the given string."""
+  state_starts_with: String
+
+  """All values not starting with the given string."""
+  state_not_starts_with: String
+
+  """All values ending with the given string."""
+  state_ends_with: String
+
+  """All values not ending with the given string."""
+  state_not_ends_with: String
+  zip: String
+
+  """All values that are not equal to given value."""
+  zip_not: String
+
+  """All values that are contained in given list."""
+  zip_in: [String!]
+
+  """All values that are not contained in given list."""
+  zip_not_in: [String!]
+
+  """All values less than the given value."""
+  zip_lt: String
+
+  """All values less than or equal the given value."""
+  zip_lte: String
+
+  """All values greater than the given value."""
+  zip_gt: String
+
+  """All values greater than or equal the given value."""
+  zip_gte: String
+
+  """All values containing the given string."""
+  zip_contains: String
+
+  """All values not containing the given string."""
+  zip_not_contains: String
+
+  """All values starting with the given string."""
+  zip_starts_with: String
+
+  """All values not starting with the given string."""
+  zip_not_starts_with: String
+
+  """All values ending with the given string."""
+  zip_ends_with: String
+
+  """All values not ending with the given string."""
+  zip_not_ends_with: String
+  phone: String
+
+  """All values that are not equal to given value."""
+  phone_not: String
+
+  """All values that are contained in given list."""
+  phone_in: [String!]
+
+  """All values that are not contained in given list."""
+  phone_not_in: [String!]
+
+  """All values less than the given value."""
+  phone_lt: String
+
+  """All values less than or equal the given value."""
+  phone_lte: String
+
+  """All values greater than the given value."""
+  phone_gt: String
+
+  """All values greater than or equal the given value."""
+  phone_gte: String
+
+  """All values containing the given string."""
+  phone_contains: String
+
+  """All values not containing the given string."""
+  phone_not_contains: String
+
+  """All values starting with the given string."""
+  phone_starts_with: String
+
+  """All values not starting with the given string."""
+  phone_not_starts_with: String
+
+  """All values ending with the given string."""
+  phone_ends_with: String
+
+  """All values not ending with the given string."""
+  phone_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
   type: String
 
   """All values that are not equal to given value."""
@@ -4210,6 +4581,13 @@ input InstitutionSubscriptionWhereInput {
 
 input InstitutionUpdateDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4226,6 +4604,13 @@ input InstitutionUpdateDataInput {
 
 input InstitutionUpdateInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4242,6 +4627,13 @@ input InstitutionUpdateInput {
 
 input InstitutionUpdateManyDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4250,6 +4642,13 @@ input InstitutionUpdateManyDataInput {
 
 input InstitutionUpdateManyMutationInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4354,6 +4753,13 @@ input InstitutionUpdateOneWithoutUsersInput {
 
 input InstitutionUpdateWithoutAddedByDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4369,6 +4775,13 @@ input InstitutionUpdateWithoutAddedByDataInput {
 
 input InstitutionUpdateWithoutAdminsDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4384,6 +4797,13 @@ input InstitutionUpdateWithoutAdminsDataInput {
 
 input InstitutionUpdateWithoutContactsDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4399,6 +4819,13 @@ input InstitutionUpdateWithoutContactsDataInput {
 
 input InstitutionUpdateWithoutCoursesDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4414,6 +4841,13 @@ input InstitutionUpdateWithoutCoursesDataInput {
 
 input InstitutionUpdateWithoutStudentsDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4429,6 +4863,13 @@ input InstitutionUpdateWithoutStudentsDataInput {
 
 input InstitutionUpdateWithoutTeachersDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4444,6 +4885,13 @@ input InstitutionUpdateWithoutTeachersDataInput {
 
 input InstitutionUpdateWithoutUpdatedByDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4459,6 +4907,13 @@ input InstitutionUpdateWithoutUpdatedByDataInput {
 
 input InstitutionUpdateWithoutUsersDataInput {
   name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   addedDate: DateTime
@@ -4642,6 +5097,286 @@ input InstitutionWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  address1: String
+
+  """All values that are not equal to given value."""
+  address1_not: String
+
+  """All values that are contained in given list."""
+  address1_in: [String!]
+
+  """All values that are not contained in given list."""
+  address1_not_in: [String!]
+
+  """All values less than the given value."""
+  address1_lt: String
+
+  """All values less than or equal the given value."""
+  address1_lte: String
+
+  """All values greater than the given value."""
+  address1_gt: String
+
+  """All values greater than or equal the given value."""
+  address1_gte: String
+
+  """All values containing the given string."""
+  address1_contains: String
+
+  """All values not containing the given string."""
+  address1_not_contains: String
+
+  """All values starting with the given string."""
+  address1_starts_with: String
+
+  """All values not starting with the given string."""
+  address1_not_starts_with: String
+
+  """All values ending with the given string."""
+  address1_ends_with: String
+
+  """All values not ending with the given string."""
+  address1_not_ends_with: String
+  address2: String
+
+  """All values that are not equal to given value."""
+  address2_not: String
+
+  """All values that are contained in given list."""
+  address2_in: [String!]
+
+  """All values that are not contained in given list."""
+  address2_not_in: [String!]
+
+  """All values less than the given value."""
+  address2_lt: String
+
+  """All values less than or equal the given value."""
+  address2_lte: String
+
+  """All values greater than the given value."""
+  address2_gt: String
+
+  """All values greater than or equal the given value."""
+  address2_gte: String
+
+  """All values containing the given string."""
+  address2_contains: String
+
+  """All values not containing the given string."""
+  address2_not_contains: String
+
+  """All values starting with the given string."""
+  address2_starts_with: String
+
+  """All values not starting with the given string."""
+  address2_not_starts_with: String
+
+  """All values ending with the given string."""
+  address2_ends_with: String
+
+  """All values not ending with the given string."""
+  address2_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  state: String
+
+  """All values that are not equal to given value."""
+  state_not: String
+
+  """All values that are contained in given list."""
+  state_in: [String!]
+
+  """All values that are not contained in given list."""
+  state_not_in: [String!]
+
+  """All values less than the given value."""
+  state_lt: String
+
+  """All values less than or equal the given value."""
+  state_lte: String
+
+  """All values greater than the given value."""
+  state_gt: String
+
+  """All values greater than or equal the given value."""
+  state_gte: String
+
+  """All values containing the given string."""
+  state_contains: String
+
+  """All values not containing the given string."""
+  state_not_contains: String
+
+  """All values starting with the given string."""
+  state_starts_with: String
+
+  """All values not starting with the given string."""
+  state_not_starts_with: String
+
+  """All values ending with the given string."""
+  state_ends_with: String
+
+  """All values not ending with the given string."""
+  state_not_ends_with: String
+  zip: String
+
+  """All values that are not equal to given value."""
+  zip_not: String
+
+  """All values that are contained in given list."""
+  zip_in: [String!]
+
+  """All values that are not contained in given list."""
+  zip_not_in: [String!]
+
+  """All values less than the given value."""
+  zip_lt: String
+
+  """All values less than or equal the given value."""
+  zip_lte: String
+
+  """All values greater than the given value."""
+  zip_gt: String
+
+  """All values greater than or equal the given value."""
+  zip_gte: String
+
+  """All values containing the given string."""
+  zip_contains: String
+
+  """All values not containing the given string."""
+  zip_not_contains: String
+
+  """All values starting with the given string."""
+  zip_starts_with: String
+
+  """All values not starting with the given string."""
+  zip_not_starts_with: String
+
+  """All values ending with the given string."""
+  zip_ends_with: String
+
+  """All values not ending with the given string."""
+  zip_not_ends_with: String
+  phone: String
+
+  """All values that are not equal to given value."""
+  phone_not: String
+
+  """All values that are contained in given list."""
+  phone_in: [String!]
+
+  """All values that are not contained in given list."""
+  phone_not_in: [String!]
+
+  """All values less than the given value."""
+  phone_lt: String
+
+  """All values less than or equal the given value."""
+  phone_lte: String
+
+  """All values greater than the given value."""
+  phone_gt: String
+
+  """All values greater than or equal the given value."""
+  phone_gte: String
+
+  """All values containing the given string."""
+  phone_contains: String
+
+  """All values not containing the given string."""
+  phone_not_contains: String
+
+  """All values starting with the given string."""
+  phone_starts_with: String
+
+  """All values not starting with the given string."""
+  phone_not_starts_with: String
+
+  """All values ending with the given string."""
+  phone_ends_with: String
+
+  """All values not ending with the given string."""
+  phone_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
   type: String
 
   """All values that are not equal to given value."""
@@ -10610,9 +11345,16 @@ type User implements Node {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
   studentIds: [String!]!
   teacherIds: [String!]!
-  phone: String
   lastLogin: DateTime
   signUpDate: DateTime
   online: Boolean
@@ -10678,6 +11420,13 @@ input UserCreateInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -10914,6 +11663,13 @@ input UserCreateWithoutAddedInvitesByInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -10971,6 +11727,13 @@ input UserCreateWithoutAdminInstitutionsInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11028,6 +11791,13 @@ input UserCreateWithoutAnswersInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11085,6 +11855,13 @@ input UserCreateWithoutAnswerUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11142,6 +11919,13 @@ input UserCreateWithoutChallengeMessagesAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11199,6 +11983,13 @@ input UserCreateWithoutChallengesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11256,6 +12047,13 @@ input UserCreateWithoutChallengeUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11313,6 +12111,13 @@ input UserCreateWithoutCoursesAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11370,6 +12175,13 @@ input UserCreateWithoutCourseUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11427,6 +12239,13 @@ input UserCreateWithoutInstitutionContactInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11484,6 +12303,13 @@ input UserCreateWithoutInstitutionInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11541,6 +12367,13 @@ input UserCreateWithoutInstitutionsAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11598,6 +12431,13 @@ input UserCreateWithoutInstitutionUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11655,6 +12495,13 @@ input UserCreateWithoutInvitesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11712,6 +12559,13 @@ input UserCreateWithoutInvitesSentInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11769,6 +12623,13 @@ input UserCreateWithoutInvitesSentToInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11826,6 +12687,13 @@ input UserCreateWithoutPanelsAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11883,6 +12751,13 @@ input UserCreateWithoutQuestionChoiceAddedByInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11940,6 +12815,13 @@ input UserCreateWithoutQuestionChoiceUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -11997,6 +12879,13 @@ input UserCreateWithoutQuestionsAddedByInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12054,6 +12943,13 @@ input UserCreateWithoutQuestionsSentToInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12111,6 +13007,13 @@ input UserCreateWithoutQuestionUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12168,6 +13071,13 @@ input UserCreateWithoutSentToSequencesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12225,6 +13135,13 @@ input UserCreateWithoutSequencesAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12282,6 +13199,13 @@ input UserCreateWithoutStudentCoursesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12339,6 +13263,13 @@ input UserCreateWithoutStudentInstitutionsInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12396,6 +13327,13 @@ input UserCreateWithoutTeacherCoursesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12453,6 +13391,13 @@ input UserCreateWithoutTeacherInstitutionsInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12510,6 +13455,13 @@ input UserCreateWithoutTestsAddedInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12567,6 +13519,13 @@ input UserCreateWithoutTestSequenceInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12624,6 +13583,13 @@ input UserCreateWithoutTestUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12681,6 +13647,13 @@ input UserCreateWithoutUpdatedByInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12738,6 +13711,13 @@ input UserCreateWithoutUsedTestSequenceInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12795,6 +13775,13 @@ input UserCreateWithoutUserUpdatesInput {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -12868,6 +13855,20 @@ enum UserOrderByInput {
   firstName_DESC
   lastName_ASC
   lastName_DESC
+  title_ASC
+  title_DESC
+  department_ASC
+  department_DESC
+  address1_ASC
+  address1_DESC
+  address2_ASC
+  address2_DESC
+  city_ASC
+  city_DESC
+  state_ASC
+  state_DESC
+  zip_ASC
+  zip_DESC
   phone_ASC
   phone_DESC
   lastLogin_ASC
@@ -12905,9 +13906,16 @@ type UserPreviousValues {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
   studentIds: [String!]!
   teacherIds: [String!]!
-  phone: String
   lastLogin: DateTime
   signUpDate: DateTime
   online: Boolean
@@ -13170,6 +14178,286 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   lastName_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  department: String
+
+  """All values that are not equal to given value."""
+  department_not: String
+
+  """All values that are contained in given list."""
+  department_in: [String!]
+
+  """All values that are not contained in given list."""
+  department_not_in: [String!]
+
+  """All values less than the given value."""
+  department_lt: String
+
+  """All values less than or equal the given value."""
+  department_lte: String
+
+  """All values greater than the given value."""
+  department_gt: String
+
+  """All values greater than or equal the given value."""
+  department_gte: String
+
+  """All values containing the given string."""
+  department_contains: String
+
+  """All values not containing the given string."""
+  department_not_contains: String
+
+  """All values starting with the given string."""
+  department_starts_with: String
+
+  """All values not starting with the given string."""
+  department_not_starts_with: String
+
+  """All values ending with the given string."""
+  department_ends_with: String
+
+  """All values not ending with the given string."""
+  department_not_ends_with: String
+  address1: String
+
+  """All values that are not equal to given value."""
+  address1_not: String
+
+  """All values that are contained in given list."""
+  address1_in: [String!]
+
+  """All values that are not contained in given list."""
+  address1_not_in: [String!]
+
+  """All values less than the given value."""
+  address1_lt: String
+
+  """All values less than or equal the given value."""
+  address1_lte: String
+
+  """All values greater than the given value."""
+  address1_gt: String
+
+  """All values greater than or equal the given value."""
+  address1_gte: String
+
+  """All values containing the given string."""
+  address1_contains: String
+
+  """All values not containing the given string."""
+  address1_not_contains: String
+
+  """All values starting with the given string."""
+  address1_starts_with: String
+
+  """All values not starting with the given string."""
+  address1_not_starts_with: String
+
+  """All values ending with the given string."""
+  address1_ends_with: String
+
+  """All values not ending with the given string."""
+  address1_not_ends_with: String
+  address2: String
+
+  """All values that are not equal to given value."""
+  address2_not: String
+
+  """All values that are contained in given list."""
+  address2_in: [String!]
+
+  """All values that are not contained in given list."""
+  address2_not_in: [String!]
+
+  """All values less than the given value."""
+  address2_lt: String
+
+  """All values less than or equal the given value."""
+  address2_lte: String
+
+  """All values greater than the given value."""
+  address2_gt: String
+
+  """All values greater than or equal the given value."""
+  address2_gte: String
+
+  """All values containing the given string."""
+  address2_contains: String
+
+  """All values not containing the given string."""
+  address2_not_contains: String
+
+  """All values starting with the given string."""
+  address2_starts_with: String
+
+  """All values not starting with the given string."""
+  address2_not_starts_with: String
+
+  """All values ending with the given string."""
+  address2_ends_with: String
+
+  """All values not ending with the given string."""
+  address2_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  state: String
+
+  """All values that are not equal to given value."""
+  state_not: String
+
+  """All values that are contained in given list."""
+  state_in: [String!]
+
+  """All values that are not contained in given list."""
+  state_not_in: [String!]
+
+  """All values less than the given value."""
+  state_lt: String
+
+  """All values less than or equal the given value."""
+  state_lte: String
+
+  """All values greater than the given value."""
+  state_gt: String
+
+  """All values greater than or equal the given value."""
+  state_gte: String
+
+  """All values containing the given string."""
+  state_contains: String
+
+  """All values not containing the given string."""
+  state_not_contains: String
+
+  """All values starting with the given string."""
+  state_starts_with: String
+
+  """All values not starting with the given string."""
+  state_not_starts_with: String
+
+  """All values ending with the given string."""
+  state_ends_with: String
+
+  """All values not ending with the given string."""
+  state_not_ends_with: String
+  zip: String
+
+  """All values that are not equal to given value."""
+  zip_not: String
+
+  """All values that are contained in given list."""
+  zip_in: [String!]
+
+  """All values that are not contained in given list."""
+  zip_not_in: [String!]
+
+  """All values less than the given value."""
+  zip_lt: String
+
+  """All values less than or equal the given value."""
+  zip_lte: String
+
+  """All values greater than the given value."""
+  zip_gt: String
+
+  """All values greater than or equal the given value."""
+  zip_gte: String
+
+  """All values containing the given string."""
+  zip_contains: String
+
+  """All values not containing the given string."""
+  zip_not_contains: String
+
+  """All values starting with the given string."""
+  zip_starts_with: String
+
+  """All values not starting with the given string."""
+  zip_not_starts_with: String
+
+  """All values ending with the given string."""
+  zip_ends_with: String
+
+  """All values not ending with the given string."""
+  zip_not_ends_with: String
   phone: String
 
   """All values that are not equal to given value."""
@@ -13494,6 +14782,13 @@ input UserUpdateInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -13552,6 +14847,13 @@ input UserUpdateManyDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -13574,6 +14876,13 @@ input UserUpdateManyMutationInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -13913,6 +15222,13 @@ input UserUpdateWithoutAddedInvitesByDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -13970,6 +15286,13 @@ input UserUpdateWithoutAdminInstitutionsDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14027,6 +15350,13 @@ input UserUpdateWithoutAnswersDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14084,6 +15414,13 @@ input UserUpdateWithoutAnswerUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14141,6 +15478,13 @@ input UserUpdateWithoutChallengeMessagesAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14198,6 +15542,13 @@ input UserUpdateWithoutChallengesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14255,6 +15606,13 @@ input UserUpdateWithoutChallengeUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14312,6 +15670,13 @@ input UserUpdateWithoutCoursesAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14369,6 +15734,13 @@ input UserUpdateWithoutCourseUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14426,6 +15798,13 @@ input UserUpdateWithoutInstitutionContactDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14483,6 +15862,13 @@ input UserUpdateWithoutInstitutionDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14540,6 +15926,13 @@ input UserUpdateWithoutInstitutionsAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14597,6 +15990,13 @@ input UserUpdateWithoutInstitutionUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14654,6 +16054,13 @@ input UserUpdateWithoutInvitesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14711,6 +16118,13 @@ input UserUpdateWithoutInvitesSentDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14768,6 +16182,13 @@ input UserUpdateWithoutInvitesSentToDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14825,6 +16246,13 @@ input UserUpdateWithoutPanelsAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14882,6 +16310,13 @@ input UserUpdateWithoutQuestionChoiceAddedByDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14939,6 +16374,13 @@ input UserUpdateWithoutQuestionChoiceUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -14996,6 +16438,13 @@ input UserUpdateWithoutQuestionsAddedByDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15053,6 +16502,13 @@ input UserUpdateWithoutQuestionsSentToDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15110,6 +16566,13 @@ input UserUpdateWithoutQuestionUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15167,6 +16630,13 @@ input UserUpdateWithoutSentToSequencesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15224,6 +16694,13 @@ input UserUpdateWithoutSequencesAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15281,6 +16758,13 @@ input UserUpdateWithoutStudentCoursesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15338,6 +16822,13 @@ input UserUpdateWithoutStudentInstitutionsDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15395,6 +16886,13 @@ input UserUpdateWithoutTeacherCoursesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15452,6 +16950,13 @@ input UserUpdateWithoutTeacherInstitutionsDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15509,6 +17014,13 @@ input UserUpdateWithoutTestsAddedDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15566,6 +17078,13 @@ input UserUpdateWithoutTestSequenceDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15623,6 +17142,13 @@ input UserUpdateWithoutTestUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15680,6 +17206,13 @@ input UserUpdateWithoutUpdatedByDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15737,6 +17270,13 @@ input UserUpdateWithoutUsedTestSequenceDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -15794,6 +17334,13 @@ input UserUpdateWithoutUserUpdatesDataInput {
   salutation: String
   firstName: String
   lastName: String
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
   phone: String
   lastLogin: DateTime
   signUpDate: DateTime
@@ -16330,6 +17877,286 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   lastName_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  department: String
+
+  """All values that are not equal to given value."""
+  department_not: String
+
+  """All values that are contained in given list."""
+  department_in: [String!]
+
+  """All values that are not contained in given list."""
+  department_not_in: [String!]
+
+  """All values less than the given value."""
+  department_lt: String
+
+  """All values less than or equal the given value."""
+  department_lte: String
+
+  """All values greater than the given value."""
+  department_gt: String
+
+  """All values greater than or equal the given value."""
+  department_gte: String
+
+  """All values containing the given string."""
+  department_contains: String
+
+  """All values not containing the given string."""
+  department_not_contains: String
+
+  """All values starting with the given string."""
+  department_starts_with: String
+
+  """All values not starting with the given string."""
+  department_not_starts_with: String
+
+  """All values ending with the given string."""
+  department_ends_with: String
+
+  """All values not ending with the given string."""
+  department_not_ends_with: String
+  address1: String
+
+  """All values that are not equal to given value."""
+  address1_not: String
+
+  """All values that are contained in given list."""
+  address1_in: [String!]
+
+  """All values that are not contained in given list."""
+  address1_not_in: [String!]
+
+  """All values less than the given value."""
+  address1_lt: String
+
+  """All values less than or equal the given value."""
+  address1_lte: String
+
+  """All values greater than the given value."""
+  address1_gt: String
+
+  """All values greater than or equal the given value."""
+  address1_gte: String
+
+  """All values containing the given string."""
+  address1_contains: String
+
+  """All values not containing the given string."""
+  address1_not_contains: String
+
+  """All values starting with the given string."""
+  address1_starts_with: String
+
+  """All values not starting with the given string."""
+  address1_not_starts_with: String
+
+  """All values ending with the given string."""
+  address1_ends_with: String
+
+  """All values not ending with the given string."""
+  address1_not_ends_with: String
+  address2: String
+
+  """All values that are not equal to given value."""
+  address2_not: String
+
+  """All values that are contained in given list."""
+  address2_in: [String!]
+
+  """All values that are not contained in given list."""
+  address2_not_in: [String!]
+
+  """All values less than the given value."""
+  address2_lt: String
+
+  """All values less than or equal the given value."""
+  address2_lte: String
+
+  """All values greater than the given value."""
+  address2_gt: String
+
+  """All values greater than or equal the given value."""
+  address2_gte: String
+
+  """All values containing the given string."""
+  address2_contains: String
+
+  """All values not containing the given string."""
+  address2_not_contains: String
+
+  """All values starting with the given string."""
+  address2_starts_with: String
+
+  """All values not starting with the given string."""
+  address2_not_starts_with: String
+
+  """All values ending with the given string."""
+  address2_ends_with: String
+
+  """All values not ending with the given string."""
+  address2_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  state: String
+
+  """All values that are not equal to given value."""
+  state_not: String
+
+  """All values that are contained in given list."""
+  state_in: [String!]
+
+  """All values that are not contained in given list."""
+  state_not_in: [String!]
+
+  """All values less than the given value."""
+  state_lt: String
+
+  """All values less than or equal the given value."""
+  state_lte: String
+
+  """All values greater than the given value."""
+  state_gt: String
+
+  """All values greater than or equal the given value."""
+  state_gte: String
+
+  """All values containing the given string."""
+  state_contains: String
+
+  """All values not containing the given string."""
+  state_not_contains: String
+
+  """All values starting with the given string."""
+  state_starts_with: String
+
+  """All values not starting with the given string."""
+  state_not_starts_with: String
+
+  """All values ending with the given string."""
+  state_ends_with: String
+
+  """All values not ending with the given string."""
+  state_not_ends_with: String
+  zip: String
+
+  """All values that are not equal to given value."""
+  zip_not: String
+
+  """All values that are contained in given list."""
+  zip_in: [String!]
+
+  """All values that are not contained in given list."""
+  zip_not_in: [String!]
+
+  """All values less than the given value."""
+  zip_lt: String
+
+  """All values less than or equal the given value."""
+  zip_lte: String
+
+  """All values greater than the given value."""
+  zip_gt: String
+
+  """All values greater than or equal the given value."""
+  zip_gte: String
+
+  """All values containing the given string."""
+  zip_contains: String
+
+  """All values not containing the given string."""
+  zip_not_contains: String
+
+  """All values starting with the given string."""
+  zip_starts_with: String
+
+  """All values not starting with the given string."""
+  zip_not_starts_with: String
+
+  """All values ending with the given string."""
+  zip_ends_with: String
+
+  """All values not ending with the given string."""
+  zip_not_ends_with: String
   phone: String
 
   """All values that are not equal to given value."""

@@ -17,9 +17,16 @@ type User {
   salutation: String
   firstName: String!
   lastName: String!
+  title: String
+  department: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
   studentIds: [String!]!
   teacherIds: [String!]!
-  phone: String
   lastLogin: DateTime
   signUpDate: DateTime
   online: Boolean
@@ -72,6 +79,13 @@ type User {
 type Institution {
   id: ID! @unique
   name: String!
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zip: String
+  phone: String
+  email: String
   type: String
   deleted: Boolean
   users: [User!]! @relation(name: "UsersByInstitution")
