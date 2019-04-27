@@ -176,6 +176,10 @@ type Mutation {
   joinCourse(inviteId: ID!,courseId: ID!): JoinCourse
 
   updateUser(email: String, salutation: String, firstName: String, lastName: String, title: String,  department: String,  address1: String,  address2: String,  city: String, state: String, zip: String, phone: String, role: String, pushToken: String, adminInstitutions: [ID], teacherInstitutions: [ID], studentInstitutions: [ID], studentCourseIds:[ID], studentIds:[String], teacherIds: [String], online: Boolean, touchIdEnabled: Boolean): User!
+
+  updatePersonnel(userId: ID!, email: String, salutation: String, firstName: String, lastName: String, title: String,  department: String,  address1: String,  address2: String,  city: String, state: String, zip: String, phone: String, role: String, pushToken: String, adminInstitutions: [ID], teacherInstitutions: [ID], studentInstitutions: [ID], studentCourseIds:[ID], studentIds:[String], teacherIds: [String], online: Boolean, touchIdEnabled: Boolean): User!
+
+
 }
 
 type Subscription {

@@ -128,6 +128,14 @@ async function signupAdmin(parent, args, ctx, info) {
           firstName: args.firstName,
           lastName: args.lastName,
           email: args.email,
+          title: args.title,
+          department: args.department,
+          address1: args.address1,
+          address2: args.address2,
+          city: args.city,
+          state: args.state,
+          zip: args.zip,
+          phone: args.phone,
           role: args.role,
           adminInstitutions: {
             connect: {
@@ -1912,40 +1920,24 @@ async function deleteSequence(parent, { id }, ctx, info) {
   )
 }
 
-async function updateUser(parent,  {
-      email,
-      salutation,
-      firstName,
-      lastName,
-      pushToken,
-      institution,
-      adminInstitutions,
-      teacherInstitutions,
-      studentInstitutions,
-      studentCourseIds,
-      studentIds,
-      teacherIds,
-      phone,
-      online,
-      touchIdEnabled
-      }, ctx, info) {
+async function updateUser(parent,  args, ctx, info) {
 
   const userId = await getUserId(ctx)
 
-  const teacherInstitutions1 = await checkField(teacherInstitutions)
-  const studentInstitutions1 = await checkField(studentInstitutions)
-  const adminInstitutions1 = await checkField(adminInstitutions)
-  const studentCourses = await checkField(studentCourseIds)
+  const teacherInstitutions1 = await checkField(args.teacherInstitutions)
+  const studentInstitutions1 = await checkField(args.studentInstitutions)
+  const adminInstitutions1 = await checkField(args.adminInstitutions)
+  const studentCourses = await checkField(args.studentCourseIds)
 
   const updateDate = new Date()
 
   return await ctx.db.mutation.updateUser(
     {
       data: {
-        email,
-        salutation,
-        firstName,
-        lastName,
+        email: args.email,
+        salutation: args.salutation,
+        firstName: args.firstName,
+        lastName: args.lastName,
         address1: args.address1,
         address2: args.address2,
         city: args.city,
@@ -1953,16 +1945,21 @@ async function updateUser(parent,  {
         zip: args.zip,
         phone: args.phone,
         role: args.role,
-        pushToken,
-        studentCourses,
+        pushToken: args.pushToken,
+        studentCourses: args.studentCourses,
         adminInstitutions: adminInstitutions1,
         teacherInstitutions: teacherInstitutions1,
         studentInstitutions: studentInstitutions1,
-        studentIds,
-        teacherIds,
-        online,
-        touchIdEnabled,
-        updateDate
+        studentIds: args.studentIds,
+        teacherIds: args.teacherIds,
+        online: args.online,
+        touchIdEnabled: args.touchIdEnabled,
+        updateDate,
+        updatedBy: {
+          connect: {
+            id: userId
+          }
+        }
       },
       where: {
         id: userId
@@ -1973,6 +1970,55 @@ async function updateUser(parent,  {
 
 }
 
+async function updatePersonnel(parent,  args, ctx, info) {
+
+  const userId = await getUserId(ctx)
+
+  const teacherInstitutions1 = await checkField(args.teacherInstitutions)
+  const studentInstitutions1 = await checkField(args.studentInstitutions)
+  const adminInstitutions1 = await checkField(args.adminInstitutions)
+  const studentCourses = await checkField(args.studentCourseIds)
+
+  const updateDate = new Date()
+
+  return await ctx.db.mutation.updateUser(
+    {
+      data: {
+        email: args.email,
+        salutation: args.salutation,
+        firstName: args.firstName,
+        lastName: args.lastName,
+        address1: args.address1,
+        address2: args.address2,
+        city: args.city,
+        state: args.state,
+        zip: args.zip,
+        phone: args.phone,
+        role: args.role,
+        pushToken: args.pushToken,
+        studentCourses: args.studentCourses,
+        adminInstitutions: adminInstitutions1,
+        teacherInstitutions: teacherInstitutions1,
+        studentInstitutions: studentInstitutions1,
+        studentIds: args.studentIds,
+        teacherIds: args.teacherIds,
+        online: args.online,
+        touchIdEnabled: args.touchIdEnabled,
+        updateDate,
+        updatedBy: {
+          connect: {
+            id: userId
+          }
+        }
+      },
+      where: {
+        id: args.userId
+    },
+  },
+    info
+  )
+
+}
 
 module.exports = {
   signup,
@@ -2022,5 +2068,6 @@ module.exports = {
   publishTest,
   editPublishTest,
   sendQuestion,
-  updateUser
+  updateUser,
+  updatePersonnel
 }
