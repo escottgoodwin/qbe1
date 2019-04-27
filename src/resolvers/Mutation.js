@@ -1988,6 +1988,8 @@ async function updatePersonnel(parent,  args, ctx, info) {
         salutation: args.salutation,
         firstName: args.firstName,
         lastName: args.lastName,
+        title: args.title,
+        department: args.department,
         address1: args.address1,
         address2: args.address2,
         city: args.city,
