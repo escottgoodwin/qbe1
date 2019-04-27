@@ -777,6 +777,7 @@ async function updateInstitution(parent, args, ctx, info) {
       return await ctx.db.mutation.updateInstitution(
         {
           data: {
+            name: args.name,
             address1: args.address1,
             address2: args.address2,
             city: args.city,
@@ -788,7 +789,6 @@ async function updateInstitution(parent, args, ctx, info) {
             updatedBy: {
               connect: { id: userId  }
             },
-            deleted,
             contacts,
             teachers,
             students,
@@ -796,7 +796,7 @@ async function updateInstitution(parent, args, ctx, info) {
             courses,
           },
           where: {
-            id: id
+            id: args.id
           },
         },
         info
