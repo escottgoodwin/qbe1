@@ -610,7 +610,7 @@ async function login(parent, args, ctx, info) {
         id: user.id,
       },
     },
-    ` { id password firstName lastName pushToken role online teacherInstitutions { id name } studentInstitutions { id name } } `
+    ` { id password firstName lastName pushToken role online teacherInstitutions { id name } studentInstitutions { id name } adminInstitutions { id  name } } `
   )
 
   loginMsg = updateUser.firstName + ' ' + updateUser.lastName + ', you have successfully logged in.'
