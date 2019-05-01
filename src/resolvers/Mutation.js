@@ -566,7 +566,23 @@ async function joinCourse(parent, args, ctx, info) {
         id: args.courseId,
       },
     },
-    ` { id name courseNumber } `
+    ` { id name courseNumber institution { id } } `
+  )
+
+  const joinedUser = await ctx.db.mutation.updateUser(
+    {
+      data: {
+        studentInstitutions: {
+          connect: {
+            id: joinedCourse.institution.id
+          }
+        }
+      },
+      where: {
+        id: userId,
+      },
+    },
+    ` { id } `
   )
 
   joinCourseMsg = `You have joined ${joinedCourse.name} ${joinedCourse.courseNumber}.`
