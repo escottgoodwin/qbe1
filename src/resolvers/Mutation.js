@@ -919,7 +919,7 @@ async function deleteCourse(parent, { id }, ctx, info) {
   throw new Error(`Unauthorized, must be a teacher for this course`)
 }
 
-async function addTest(parent, { subject, testNumber, testDate, courseId }, ctx, info) {
+async function addTest(parent, { subject, testType, testNumber, testDate, courseId }, ctx, info) {
   const userId = await getUserId(ctx)
   const addedDate = new Date()
 
@@ -927,6 +927,7 @@ async function addTest(parent, { subject, testNumber, testDate, courseId }, ctx,
     {
       data: {
         subject,
+        testType,
         testNumber,
         testDate,
         addedDate,
