@@ -15,7 +15,6 @@ const QuestionChoiceSearch = require('./resolvers/QuestionChoiceSearch')
 const ChallengeSearch = require('./resolvers/ChallengeSearch')
 const ChallengeMessageSearch = require('./resolvers/ChallengeMessageSearch')
 const AnswerSearch = require('./resolvers/AnswerSearch')
-const functions = require('firebase-functions');
 
 const { directiveResolvers } = require("./directives")
 
@@ -40,7 +39,6 @@ const resolvers = {
   }
 }
 
-
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers,
@@ -56,13 +54,4 @@ const server = new GraphQLServer({
   }),
 })
 
-const options = {
-  cors: true,
-}
-
-server.createHttpServer(options);
-const express = server.express
-
-module.exports = {
-  yoga: functions.https.onRequest(express),
-}
+server.start(() => console.log('Server is running on http://localhost:4000'))
