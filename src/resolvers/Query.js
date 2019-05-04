@@ -151,7 +151,7 @@ async function courseDashboard(parent, args, ctx, info) {
 
       const queriedCourseTest= await ctx.db.query.test(
         { where: { id: testId } }, `{ id subject deleted published testType release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
-
+        console.log(queriedCourseTest)
       const queriedCourseAnswers= await ctx.db.query.answers(
         { where: { question: {test:{ id:testId } } } }, `{ id answerCorrect }`)
 

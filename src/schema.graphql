@@ -345,6 +345,7 @@ type CourseTest {
   subject: String!
   testDate: DateTime!
   testNumber: String!
+  testType: String
   release: Boolean
   published: Boolean
   releaseDate: DateTime
