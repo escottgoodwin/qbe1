@@ -150,7 +150,7 @@ async function courseDashboard(parent, args, ctx, info) {
     async function testList(testId){
 
       const queriedCourseTest= await ctx.db.query.test(
-        { where: { id: testId } }, `{ id subject deleted published release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
+        { where: { id: testId } }, `{ id subject deleted published testType release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
 
       const queriedCourseAnswers= await ctx.db.query.answers(
         { where: { question: {test:{ id:testId } } } }, `{ id answerCorrect }`)
@@ -159,6 +159,7 @@ async function courseDashboard(parent, args, ctx, info) {
       const subject= queriedCourseTest.subject
       const testDate= queriedCourseTest.testDate
       const testNumber= queriedCourseTest.testNumber
+      const testType= queriedCourseTest.testType
       const questionsCount= questions.length > 0 ? questions.length : 0
       const panelsCount= queriedCourseTest.panels.length
       const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
@@ -192,6 +193,7 @@ async function courseDashboard(parent, args, ctx, info) {
         subject,
         testDate,
         testNumber,
+        testType,
         release: queriedCourseTest.release,
         published:queriedCourseTest.published,
         releaseDate:queriedCourseTest.releaseDate,
