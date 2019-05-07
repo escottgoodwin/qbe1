@@ -51,7 +51,7 @@ function sendGridSend(msg){
 
   const msgSg = {
     to: msg.to,
-    from: 'quandria_help@quandria.com',
+    from: 'admim@quandrio.com',
     subject:msg.subject,
     text: msg.text,
     html:msg.html,
