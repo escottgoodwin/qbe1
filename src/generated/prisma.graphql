@@ -1,5 +1,5 @@
 # source: https://qbe1-c802843c00.herokuapp.com/database/dev
-# timestamp: Fri Apr 26 2019 15:39:53 GMT-0700 (Pacific Daylight Time)
+# timestamp: Wed May 15 2019 09:48:54 GMT-0700 (Pacific Daylight Time)
 
 type AggregateAnswer {
   count: Int!
@@ -2041,6 +2041,7 @@ type Course implements Node {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   invitesSentBy: User
@@ -2069,6 +2070,7 @@ input CourseCreateInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2134,6 +2136,7 @@ input CourseCreateWithoutAddedByInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   updatedBy: UserCreateOneWithoutCourseUpdatesInput
@@ -2153,6 +2156,7 @@ input CourseCreateWithoutInstitutionInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2172,6 +2176,7 @@ input CourseCreateWithoutInviteCoursesInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2191,6 +2196,7 @@ input CourseCreateWithoutInvitesSentByInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2210,6 +2216,7 @@ input CourseCreateWithoutInvitesSentInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2229,6 +2236,7 @@ input CourseCreateWithoutStudentsInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2248,6 +2256,7 @@ input CourseCreateWithoutTeachersInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2267,6 +2276,7 @@ input CourseCreateWithoutTestsInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2286,6 +2296,7 @@ input CourseCreateWithoutUpdatedByInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserCreateOneWithoutCoursesAddedInput!
@@ -2701,6 +2712,8 @@ enum CourseOrderByInput {
   time_DESC
   department1_ASC
   department1_DESC
+  image_ASC
+  image_DESC
   deleted_ASC
   deleted_DESC
   invitesSentDate_ASC
@@ -2719,6 +2732,7 @@ type CoursePreviousValues {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
 }
@@ -2976,6 +2990,46 @@ input CourseScalarWhereInput {
 
   """All values not ending with the given string."""
   department1_not_ends_with: String
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
   deleted: Boolean
 
   """All values that are not equal to given value."""
@@ -3050,6 +3104,7 @@ input CourseUpdateInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3070,6 +3125,7 @@ input CourseUpdateManyDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
 }
@@ -3081,6 +3137,7 @@ input CourseUpdateManyMutationInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
 }
@@ -3188,6 +3245,7 @@ input CourseUpdateWithoutAddedByDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   updatedBy: UserUpdateOneWithoutCourseUpdatesInput
@@ -3207,6 +3265,7 @@ input CourseUpdateWithoutInstitutionDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3226,6 +3285,7 @@ input CourseUpdateWithoutInviteCoursesDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3245,6 +3305,7 @@ input CourseUpdateWithoutInvitesSentByDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3264,6 +3325,7 @@ input CourseUpdateWithoutInvitesSentDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3283,6 +3345,7 @@ input CourseUpdateWithoutStudentsDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3302,6 +3365,7 @@ input CourseUpdateWithoutTeachersDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3321,6 +3385,7 @@ input CourseUpdateWithoutTestsDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3340,6 +3405,7 @@ input CourseUpdateWithoutUpdatedByDataInput {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   addedBy: UserUpdateOneRequiredWithoutCoursesAddedInput
@@ -3692,6 +3758,46 @@ input CourseWhereInput {
 
   """All values not ending with the given string."""
   department1_not_ends_with: String
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
   deleted: Boolean
 
   """All values that are not equal to given value."""

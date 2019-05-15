@@ -832,7 +832,7 @@ async function deleteInstitution(parent, { id }, ctx, info) {
   )
 }
 
-async function addCourse(parent, { name, department1, courseNumber, time, deleted, institutionId }, ctx, info) {
+async function addCourse(parent, { name, department1, courseNumber, time, image, deleted, institutionId }, ctx, info) {
   const userId = await getUserId(ctx)
   const addedDate = new Date()
 
@@ -844,6 +844,7 @@ async function addCourse(parent, { name, department1, courseNumber, time, delete
         courseNumber,
         time,
         addedDate,
+        image,
         deleted,
         institution: {
           connect: { id: institutionId  }
@@ -860,7 +861,7 @@ async function addCourse(parent, { name, department1, courseNumber, time, delete
   )
 }
 
-async function updateCourse(parent, { id, name, department1, courseNumber, time, teacherIds, studentIds, deleted }, ctx, info) {
+async function updateCourse(parent, { id, name, department1, courseNumber, time, teacherIds, studentIds, image, deleted }, ctx, info) {
   const userId = await getUserId(ctx)
   const updateDate = new Date()
 
@@ -882,6 +883,7 @@ async function updateCourse(parent, { id, name, department1, courseNumber, time,
             teachers,
             students,
             updateDate,
+            image,
             deleted,
             updatedBy: {
               connect: {

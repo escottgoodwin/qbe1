@@ -141,7 +141,7 @@ async function courses(parent, args, ctx, info) {
 
 async function course(parent, args, ctx, info) {
 
-      return await ctx.db.query.course( { where: { id: args.id } },info,)
+      return await ctx.db.query.course( { where: { id: args.id } },info )
 
 }
 
@@ -151,17 +151,14 @@ async function courseDashboard(parent, args, ctx, info) {
 
       const queriedCourseTest= await ctx.db.query.test(
         { where: { id: testId } }, `{ id subject deleted published testType release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
-        console.log(queriedCourseTest)
+
       const queriedCourseAnswers= await ctx.db.query.answers(
         { where: { question: {test:{ id:testId } } } }, `{ id answerCorrect }`)
 
-      const questions = queriedCourseTest.questions
-      const subject= queriedCourseTest.subject
-      const testDate= queriedCourseTest.testDate
-      const testNumber= queriedCourseTest.testNumber
-      const testType= queriedCourseTest.testType
+      const { id, questions, subject, testDate, testNumber, testType, panels, release, releaseDate, published, publishDate, deleted } = queriedCourseTest
+
       const questionsCount= questions.length > 0 ? questions.length : 0
-      const panelsCount= queriedCourseTest.panels.length
+      const panelsCount= panels.length
       const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
       const answersCount= queriedCourseAnswers.length>0 ? queriedCourseAnswers.length : 0
       const answersCorrect= queriedCourseAnswers.length>0 ? queriedCourseAnswers.filter(a => a.answerCorrect).length : 0
@@ -188,16 +185,16 @@ async function courseDashboard(parent, args, ctx, info) {
     )
 
       return {
-        id: queriedCourseTest.id,
-        deleted:queriedCourseTest.deleted,
+        id,
+        deleted,
         subject,
         testDate,
         testNumber,
         testType,
-        release: queriedCourseTest.release,
-        published:queriedCourseTest.published,
-        releaseDate:queriedCourseTest.releaseDate,
-        publishDate:queriedCourseTest.publishDate,
+        release,
+        published,
+        releaseDate,
+        publishDate,
         questionsCount,
         panelsCount,
         answersCount,
@@ -206,18 +203,19 @@ async function courseDashboard(parent, args, ctx, info) {
       }
   }
 
-    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber time students { id } tests { id } }`)
-
+    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber time image students { id } tests { id } }`)
+    const { id, deleted, name, courseNumber, time, image, students,  tests } = course
     const courseTestList = await Promise.all(course.tests.map(test => (testList(test.id))))
 
     return {
-      id: course.id,
-      deleted: course.deleted,
-      name: course.name,
-      time: course.time,
-      courseNumber : course.courseNumber ,
-      studentCount: course.students.length,
-      testCount: course.tests.length,
+      id,
+      deleted,
+      name,
+      time,
+      image,
+      courseNumber,
+      studentCount: students.length,
+      testCount: tests.length,
       courseTestList: courseTestList
   }
 
@@ -228,10 +226,8 @@ async function testList(parent, args, ctx, info) {
       const queriedCourseTest= await ctx.db.query.test(
         { where: { id: args.testId } }, `{ id subject deleted published release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { answerCorrect challenge { id } } } }`)
 
-      const questions = queriedCourseTest.questions
-      const subject= queriedCourseTest.subject
-      const testDate= queriedCourseTest.testDate
-      const testNumber= queriedCourseTest.testNumber
+      const { id, subject, deleted, published, release, releaseDate, publishDate, testDate, testNumber, panels, questions } = queriedCourseTest
+
       const questionsCount= questions.length > 0 ? questions.length : 0
       const panelsCount= queriedCourseTest.panels.length
       const answers = questions.length>0 ? questions.map(q => q.questionAnswers) : []
@@ -241,15 +237,15 @@ async function testList(parent, args, ctx, info) {
       const challengeCount=  answers.filter(a => !!a.challenge).length > 0 ? answers.filter(a => !!a.challenge).length : 0
 
       return {
-        id: queriedCourseTest.id,
-        deleted:queriedCourseTest.deleted,
+        id,
+        deleted,
         subject,
         testDate,
         testNumber,
-        release: queriedCourseTest.release,
-        published:queriedCourseTest.published,
-        releaseDate:queriedCourseTest.releaseDate,
-        publishDate:queriedCourseTest.publishDate,
+        release,
+        published,
+        releaseDate,
+        publishDate,
         questionsCount,
         panelsCount,
         answersCount,
@@ -460,7 +456,7 @@ async function tests(parent, args, ctx, info) {
 
 async function test(parent, args, ctx, info) {
 
-  return await ctx.db.query.test( { where: { id: args.id } },info,)
+  return await ctx.db.query.test( { where: { id: args.id } }, info)
 
 }
 

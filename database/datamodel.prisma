@@ -110,6 +110,7 @@ type Course {
   courseNumber: String
   time: String
   department1: String
+  image: String
   deleted: Boolean
   invitesSentDate: DateTime
   invitesSentBy: User @relation(name: "InvitesSentByUser")

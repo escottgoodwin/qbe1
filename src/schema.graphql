@@ -101,9 +101,9 @@ type Mutation {
 
   deleteInstitution(id: ID!): Institution! @hasRole(roles: ["QUANDRIA"])
 
-  addCourse(name: String!, department1: String, courseNumber: String, time: String, deleted: Boolean, institutionId: ID!): Course! @hasRole(roles: ["TEACHER","ADMIN"])
+  addCourse(name: String!, department1: String, courseNumber: String, time: String, image: String, deleted: Boolean, institutionId: ID!): Course! @hasRole(roles: ["TEACHER","ADMIN"])
 
-  updateCourse(id: ID!, name: String, department1: String, courseNumber: String, time: String, deleted: Boolean, teacherIds: [ID], studentIds: [ID]): Course! @hasRole(roles: ["TEACHER","ADMIN"])
+  updateCourse(id: ID!, name: String, department1: String, courseNumber: String, time: String, image: String, deleted: Boolean, teacherIds: [ID], studentIds: [ID]): Course! @hasRole(roles: ["TEACHER","ADMIN"])
 
   deleteCourse(id: ID!): Course! @hasRole(roles: ["TEACHER","ADMIN"])
 
@@ -358,6 +358,7 @@ type CourseDashboard {
     deleted: Boolean
     name: String!
     time: DateTime!
+    image: String
     courseNumber: String!
     studentCount: Int!
     testCount: Int!
