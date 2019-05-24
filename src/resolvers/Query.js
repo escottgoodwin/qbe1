@@ -325,6 +325,7 @@ async function userQuestionStats(parent, args, ctx, info){
       }
     `
 
+
   const totalQuestions = await ctx.db.query.questionsConnection({ where: { addedBy: { id: userId }, test: { id: args.testId } } },
       countSelectionSet)
 
@@ -579,6 +580,63 @@ async function userQuestions(parent, args, ctx, info) {
   )
 }
 
+async function userQuestions1(parent, args, ctx, info) {
+
+    const userId = await getUserId(ctx)
+
+    const questions =  await ctx.db.query.questions(
+      {  where:
+        {
+          AND:[{
+          test:{ id: args.testId }
+        },
+        {
+        addedBy: { id: userId }
+      }]
+    }
+  },
+  info
+  )
+
+  const countSelectionSet = `
+    {
+      aggregate {
+        count
+      }
+    }
+  `
+
+
+const totalQuestions = await ctx.db.query.questionsConnection({ where: { addedBy: { id: userId }, test: { id: args.testId } } },
+    countSelectionSet)
+
+  //user's questions that have answers
+  const answeredQuestions = await ctx.db.query.answersConnection({ where: { AND: [ { answer: { question: { addedBy: { id: userId } } } }, { answer: { question: { test: { id: args.testId } } } } ] } },
+    countSelectionSet)
+
+  //user's questions that have answers that are correct
+  const answeredQuestionsCorrect = await ctx.db.query.answersConnection({ where: { AND: [ { answer: { question: { addedBy: { id: userId } } } }, { answer: { question: { test: { id: args.testId } } }, answerCorrect: true } ] } },
+    countSelectionSet)
+
+  // percent correct of user's questions that have answers
+  const questionCorrectPercent = answeredQuestionsCorrect.aggregate.count / answeredQuestions.aggregate.count
+
+  function qpercent(qpercent){
+    if (qpercent > 0){ return qpercent } else { return 0.0 }
+  }
+
+   const percentCorrect = qpercent(questionCorrectPercent)
+
+  return {
+    questions,
+    totalQuestions: totalQuestions.aggregate.count,
+    answers: answeredQuestions.aggregate.count,
+    totalCorrect: answeredQuestionsCorrect.aggregate.count,
+    percentCorrect,
+  }
+
+}
+
 async function userAnswers(parent, args, ctx, info) {
 
       const userId = await getUserId(ctx)
@@ -595,6 +653,71 @@ async function userAnswers(parent, args, ctx, info) {
       },
       info
   )
+}
+
+async function userAnswers1(parent, args, ctx, info) {
+
+      const userId = await getUserId(ctx)
+
+      const answers = await ctx.db.query.answers(
+      {  where:
+        { AND: [{
+            question:{
+              test: { id: args.testId }
+            }
+            },
+            { addedBy: { id: userId } }
+          ]}
+      },
+      `{
+      id
+      answer{
+        id
+        choice
+        correct
+      }
+      answerCorrect
+      question{
+        id
+        question
+      }
+      addedDate
+      addedBy{
+        id
+        firstName
+        lastName
+      }
+    }`
+  )
+
+  const countSelectionSet = `
+    {
+      aggregate {
+        count
+      }
+    }
+  `
+  const answersConnection = await ctx.db.query.answersConnection({ where: { addedBy: { id: userId }, answer: { question: { test: { id: args.testId } } } } },
+    countSelectionSet)
+
+  const answersCorrectConnection = await ctx.db.query.answersConnection({ where: { addedBy: { id: userId }, answer: { question: { test: { id: args.testId } } }, answerCorrect: true } },
+    countSelectionSet)
+
+  const questionCorrectPercent = answersCorrectConnection.aggregate.count / answersConnection.aggregate.count
+
+  function qpercent(qpercent){
+    if (qpercent > 0){ return qpercent } else { return 0.0 }
+  }
+
+  const percentCorrect = qpercent(questionCorrectPercent)
+
+  return {
+    answers,
+    total: answersConnection.aggregate.count,
+    totalCorrect: answersCorrectConnection.aggregate.count,
+    percentCorrect
+  }
+
 }
 
 async function question(parent, args, ctx, info) {
@@ -794,7 +917,9 @@ module.exports = {
   questions,
   question,
   userQuestions,
+  userQuestions1,
   userAnswers,
+  userAnswers1,
   questionsAnswered,
   questionStats,
   questionchoices,
