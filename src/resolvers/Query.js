@@ -680,6 +680,11 @@ async function userAnswers1(parent, args, ctx, info) {
       question{
         id
         question
+        choices{
+          id
+          choice
+          correct
+        }
       }
       addedDate
       addedBy{
