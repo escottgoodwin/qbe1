@@ -221,6 +221,60 @@ async function courseDashboard(parent, args, ctx, info) {
 
 }
 
+
+async function courseDashboard1(parent, args, ctx, info) {
+
+    async function testList(queriedCourseTest){
+
+      const { id, questions, subject, testDate, testNumber, testType, panels, release, releaseDate, published, publishDate, deleted } = queriedCourseTest
+
+      const questionsCount= questions.length > 0 ? questions.length : 0
+      const panelsCount= panels.length
+      const answers = questions.length>0 ? questions.map(q => q.questionAnswers).flat() : []
+      const answersCount = answers.length>0 ? answers.length : 0
+      const answersCorrect = answers.length>0 ? answers.filter(q => q.answerCorrect).length : 0
+      const accuracy= answersCorrect / answersCount>0 ? answersCorrect / answersCount : 0.0
+
+      return {
+        id,
+        deleted,
+        subject,
+        testDate,
+        testNumber,
+        testType,
+        release,
+        published,
+        releaseDate,
+        publishDate,
+        questionsCount,
+        panelsCount,
+        answersCount,
+        accuracy,
+        challengeCount: 0
+      }
+  }
+
+    const course = await ctx.db.query.course( { where: { id: args.courseId } },`{ id deleted name courseNumber time image students { id } tests { id subject deleted published testType release releaseDate publishDate testDate testNumber panels { id } questions { id  questionAnswers { id answerCorrect challenge { id } } } } }`)
+    const { id, deleted, name, courseNumber, time, image, students, tests } = course
+    const courseTestList = tests.map(test => testList(test))
+
+    console.log(courseTestList)
+
+    return {
+      id,
+      deleted,
+      name,
+      time,
+      image,
+      courseNumber,
+      studentCount: students.length,
+      testCount: tests.length,
+      courseTestList: courseTestList
+  }
+
+}
+
+
 async function testList(parent, args, ctx, info) {
 
       const queriedCourseTest= await ctx.db.query.test(
@@ -908,6 +962,7 @@ module.exports = {
   courses,
   course,
   courseDashboard,
+  courseDashboard1,
   testList,
   tests,
   test,
