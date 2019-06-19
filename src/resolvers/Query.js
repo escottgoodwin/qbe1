@@ -384,11 +384,11 @@ async function userQuestionStats(parent, args, ctx, info){
       countSelectionSet)
 
     //user's questions that have answers
-    const answeredQuestions = await ctx.db.query.answersConnection({ where: { AND: [ { addedBy: { id: userId } }, { answer: { question: { test: { id: args.testId } } } } ] } },
+    const answeredQuestions = await ctx.db.query.answersConnection({ where: { AND: [ { question: { addedBy: { id: userId } } }, { answer: { question: { test: { id: args.testId } } } } ] } },
       countSelectionSet)
 
     //user's questions that have answers that are correct
-    const answeredQuestionsCorrect = await ctx.db.query.answersConnection({ where: { AND: [ { addedBy: { id: userId } }, { answer: { question: { test: { id: args.testId } } }, answerCorrect: true } ] } },
+    const answeredQuestionsCorrect = await ctx.db.query.answersConnection({ where: { AND: [ { question: { addedBy: { id: userId } } }, { answer: { question: { test: { id: args.testId } } }, answerCorrect: true } ] } },
       countSelectionSet)
 
     // percent correct of user's questions that have answers
@@ -651,6 +651,7 @@ async function userQuestions1(parent, args, ctx, info) {
   },
   info
   )
+  console.log(questions)
 
   const countSelectionSet = `
     {
