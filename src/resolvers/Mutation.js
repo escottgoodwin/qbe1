@@ -1447,6 +1447,9 @@ async function updateQuestion(parent, args, ctx, info) {
     throw new Error(`Unauthorized, you are not the author of this question`)
   }
 
+  console.log('cid1',args.choice1Id)
+  console.log('cid2',args.choice2Id)
+
   return await ctx.db.mutation.updateQuestion(
     {
       data: {
@@ -1465,9 +1468,6 @@ async function updateQuestion(parent, args, ctx, info) {
                 choice:args.choice1,
                 correct: args.choiceCorrect1,
                 updateDate,
-                updatedBy: {
-                  connect: { id: userId },
-                },
               }
             },
             {
@@ -1478,9 +1478,6 @@ async function updateQuestion(parent, args, ctx, info) {
                 choice:args.choice2,
                 correct: args.choiceCorrect2,
                 updateDate,
-                updatedBy: {
-                  connect: { id: userId },
-                },
               }
             },{
               where: {
@@ -1490,9 +1487,6 @@ async function updateQuestion(parent, args, ctx, info) {
                 choice:args.choice3,
                 correct: args.choiceCorrect3,
                 updateDate,
-                updatedBy: {
-                  connect: { id: userId },
-                },
               }
             },{
               where: {
@@ -1502,14 +1496,11 @@ async function updateQuestion(parent, args, ctx, info) {
                 choice:args.choice4,
                 correct: args.choiceCorrect4,
                 updateDate,
-                updatedBy: {
-                  connect: { id: userId },
-                },
               }
             },
         ]
       }
-      },
+    },
       where: {
         id: args.id
         }

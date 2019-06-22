@@ -639,19 +639,17 @@ async function userQuestions1(parent, args, ctx, info) {
     const userId = await getUserId(ctx)
 
     const questions =  await ctx.db.query.questions(
-      {  where:
-        {
-          AND:[{
-          test:{ id: args.testId }
-        },
-        {
-        addedBy: { id: userId }
-      }]
-    }
-  },
-  info
-  )
-  console.log(questions)
+      { where:
+        {AND:[
+          {addedBy:{id:userId}},
+          {test:{id:args.testId}}
+          ]
+        }
+      },
+      `{ id question choices { id choice correct } questionAnswers { id answerCorrect answer { id choice correct } } }`
+    )
+
+  console.log('questions',questions)
 
   const countSelectionSet = `
     {
