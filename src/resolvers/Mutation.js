@@ -1192,7 +1192,7 @@ async function sendQuestion(parent, args, ctx, info) {
 }
 
 
-async function updateTest(parent, { id, deleted, subject, testType, testNumber, testDate, published, publishDate, release, releaseDate }, ctx, info) {
+async function updateTest(parent, { id, deleted, subject, testType, testNumber, testDate, published, publishDate, release, releaseDate, startTime, endTime, endDate }, ctx, info) {
   const userId = await getUserId(ctx)
   const updateDate = new Date()
 
@@ -1214,6 +1214,9 @@ async function updateTest(parent, { id, deleted, subject, testType, testNumber, 
           release,
           releaseDate,
           updateDate,
+          startTime,
+          endTime,
+          endDate,
           updatedBy: {
             connect: {
               id: userId
