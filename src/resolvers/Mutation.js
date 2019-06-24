@@ -445,7 +445,6 @@ async function sendInvite(parent, args, ctx, info) {
 
   const course = await ctx.db.query.course({where: { id: args.courseId } },`{ teachers { id } }`)
   const courseTeachers = JSON.stringify(course.teachers)
-  console.log(userId, courseTeachers)
 
   if (courseTeachers.includes(userId)){
 
@@ -985,9 +984,6 @@ async function publishTest(parent, args, ctx, info) {
   const panelShuffle = shuffleArray(panelIds)
   const studentShuffleIds = studentShuffle.map(student => student.id)
   const panelShuffleIds = panelShuffle.map(panel => panel.id)
-  console.log(studentShuffleIds)
-
-  console.log(panelShuffleIds)
 
   const sequence =  ctx.db.mutation.createSequence(
     {
@@ -1011,8 +1007,6 @@ async function publishTest(parent, args, ctx, info) {
 
   const sentTo = studentShuffleIds[0]
   const sentPanel = panelShuffleIds[0]
-  console.log('student',sentTo)
-  console.log('panel',sentPanel)
 
   const question = await ctx.db.mutation.createQuestion(
     {
@@ -1422,6 +1416,7 @@ async function addQuestion(parent, { question, testId, panelId, sentToId, correc
           question,
           expirationTime,
           addedDate,
+          questionType:'MULTIPLE_CHOICE',
           test: {
             connect: { id: testId  }
           },
@@ -1449,9 +1444,6 @@ async function updateQuestion(parent, args, ctx, info) {
   if (!questionExists) {
     throw new Error(`Unauthorized, you are not the author of this question`)
   }
-
-  console.log('cid1',args.choice1Id)
-  console.log('cid2',args.choice2Id)
 
   return await ctx.db.mutation.updateQuestion(
     {
@@ -1561,10 +1553,9 @@ async function createQuestion(parent, args, ctx, info) {
   const testStudents = JSON.stringify(test.course.students)
 
   if (testStudents.includes(userId)){
-    console.log('authorized')
   }
   else {
-    console.log('not authorized')
+    throw new Error(`Unauthorized, you are not enrolled for this test`)
   }
 
     return await ctx.db.mutation.createQuestion(
@@ -1572,6 +1563,7 @@ async function createQuestion(parent, args, ctx, info) {
         data: {
           question: args.question,
           addedDate,
+          questionType:'MULTIPLE_CHOICE',
           test: {
             connect: { id: args.testId  }
           },
@@ -1614,6 +1606,42 @@ async function createQuestion(parent, args, ctx, info) {
         },
       },
       `{ id question test { subject id } panel { id link } choices { id choice correct } }`
+    )
+}
+
+async function createShortAnswerQuestion(parent, args, ctx, info) {
+
+  const userId = await getUserId(ctx)
+  const addedDate = new Date()
+
+  const test = await ctx.db.query.test({where: { id: args.testId } },`{ course { students { id } } }`)
+  const testStudents = JSON.stringify(test.course.students)
+
+  if (testStudents.includes(userId)){
+  }
+  else {
+    throw new Error(`Unauthorized, you are not enrolled for this test`)
+  }
+
+    return await ctx.db.mutation.createQuestion(
+      {
+        data: {
+          question: args.question,
+          correctShortAnswer: args.correctShortAnswer,
+          addedDate,
+          questionType:'SHORT_ANSWER',
+          test: {
+            connect: { id: args.testId  }
+          },
+          panel: {
+            connect: { id: args.panelId  }
+          },
+          addedBy: {
+            connect: { id: userId },
+          }
+        },
+      },
+      `{ id question correctShortAnswer test { subject id } panel { id link } choices { id choice correct } }`
     )
 }
 
@@ -1787,7 +1815,6 @@ async function addChallengeMessage(parent, { challengeMessage, challengeId }, ct
   const addedDate = new Date()
 
   const challenge = await ctx.db.query.challenge({where: { id: challengeId } },` { answer { question { addedBy { id } sentTo { id } test { course { teachers { id }  } } } } } `)
-  console.log(challenge)
   const challengers = JSON.stringify(challenge)
 
 
@@ -1834,11 +1861,47 @@ return ctx.db.mutation.createAnswer(
     data: {
       answerCorrect,
       addedDate,
+      answerType:'MULTIPLE_CHOICE',
       addedBy: {
         connect: { id: userId },
       },
       answer: {
         connect: { id: answerChoiceId  }
+      },
+      question: {
+        connect: { id: questionId  }
+      },
+    },
+  },
+  `{ id }`
+)
+}
+
+async function addShortAnswer(parent, { questionId, shortAnswerText }, ctx, info) {
+  const userId = await getUserId(ctx)
+  const addedDate = new Date()
+
+  const answerExists = await ctx.db.exists.Question({
+    id: questionId,
+  })
+
+  if (!answerExists) {
+    throw new Error(`This question doesn't exist.`)
+  }
+
+  const answerCorrect = await ctx.db.exists.Question({
+    correctShortAnswer: shortAnswerText,
+  })
+
+return ctx.db.mutation.createAnswer(
+  {
+    data: {
+      answerCorrect,
+      shortAnswerText,
+      answerType:'SHORT_ANSWER',
+      addedDate,
+      addedBy: {
+        connect: { id: userId },
       },
       question: {
         connect: { id: questionId  }
@@ -2068,6 +2131,7 @@ module.exports = {
   notificationSent,
   deleteQuestion,
   createQuestion,
+  createShortAnswerQuestion,
   addQuestionChoice,
   updateQuestionChoice,
   deleteQuestionChoice,
@@ -2076,6 +2140,7 @@ module.exports = {
   deleteChallenge,
   addChallengeMessage,
   addAnswer,
+  addShortAnswer,
   deleteAnswer,
   addSequence,
   updateSequence,

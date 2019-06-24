@@ -151,6 +151,8 @@ type Mutation {
 
   createQuestion(question: String!, choice1: String!, choice2: String!, choice3: String!, choice4: String!, choiceCorrect1: Boolean!, choiceCorrect2: Boolean!, choiceCorrect3: Boolean!, choiceCorrect4: Boolean!, testId: ID!, panelId: ID!, sentToId: ID, correctResponseImageId: ID, incorrectResponseImageId: ID): Question! @hasRole(roles: ["TEACHER","STUDENT","ADMIN"])
 
+  createShortAnswerQuestion(question: String!, correctShortAnswer: String!, testId: ID!, panelId: ID!, sentToId: ID, correctResponseImageId: ID, incorrectResponseImageId: ID): Question! @hasRole(roles: ["TEACHER","STUDENT","ADMIN"])
+
   addChallenge(challenge: String!, answerId: ID!): Challenge! @hasRole(roles: ["TEACHER","STUDENT","ADMIN"])
 
   updateChallenge(id: ID!, challenge: String): Challenge! @hasRole(roles: ["TEACHER","STUDENT","ADMIN"])
@@ -160,6 +162,8 @@ type Mutation {
   addChallengeMessage(challengeMessage: String!, challengeId: ID! ): ChallengeMessage! @hasRole(roles: ["TEACHER","STUDENT","ADMIN"])
 
   addAnswer(questionId: ID!, answerChoiceId: ID!): Answer! @hasRole(roles: ["STUDENT"])
+
+  addShortAnswer(questionId: ID!, shortAnswerText: String!): Answer! @hasRole(roles: ["STUDENT"])
 
   deleteAnswer(id: ID!): Answer! @hasRole(roles: ["STUDENT"])
 

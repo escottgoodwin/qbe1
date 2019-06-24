@@ -10,6 +10,12 @@ enum TestType {
   CLASS
 }
 
+enum QuestionType {
+  MULTIPLE_CHOICE
+  SHORT_ANSWER
+  TRUE_FALSE
+}
+
 type User {
   id: ID! @unique
   email: String! @unique
@@ -172,6 +178,8 @@ type Panel {
 type Question {
   id: ID! @unique
   question: String!
+  correctShortAnswer: String
+  questionType: QuestionType
   addedBy: User! @relation(name: "QuestionsAddedByUser")
   addedDate: DateTime
   questionTime: DateTime
@@ -205,7 +213,9 @@ type ResponseImage {
 
 type Answer {
   id: ID! @unique
-  answer: QuestionChoice! @relation(name: "AnswerByQuestionChoice")
+  answer: QuestionChoice @relation(name: "AnswerByQuestionChoice")
+  answerType: QuestionType
+  shortAnswerText: String
   answerCorrect: Boolean
   addedBy: User! @relation(name: "AnswersByUser")
   addedDate: DateTime

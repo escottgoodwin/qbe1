@@ -258,8 +258,6 @@ async function courseDashboard1(parent, args, ctx, info) {
     const { id, deleted, name, courseNumber, time, image, students, tests } = course
     const courseTestList = tests.map(test => testList(test))
 
-    console.log(courseTestList)
-
     return {
       id,
       deleted,
@@ -648,8 +646,6 @@ async function userQuestions1(parent, args, ctx, info) {
       },
       `{ id question choices { id choice correct } questionAnswers { id answerCorrect answer { id choice correct } } }`
     )
-
-  console.log('questions',questions)
 
   const countSelectionSet = `
     {
