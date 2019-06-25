@@ -644,7 +644,7 @@ async function userQuestions1(parent, args, ctx, info) {
           ]
         }
       },
-      `{ id question choices { id choice correct } questionAnswers { id answerCorrect answer { id choice correct } } }`
+      `{ id question questionType correctShortAnswer choices { id choice correct } questionAnswers { id answerCorrect answer { id choice correct } } }`
     )
 
   const countSelectionSet = `
