@@ -1178,7 +1178,7 @@ async function sendQuestion(parent, args, ctx, info) {
         id: args.questionId
         }
     },
-    `{ id question addedBy { firstName lastName } choices { id choice } test { id subject testDate course { id name } } sentTo { firstName lastName } sentPanel { link } }`
+    `{ id question questionType correctShortAnswer addedBy { firstName lastName } choices { id choice } test { id subject testDate course { id name } } sentTo { firstName lastName } sentPanel { link } }`
   )
 
   return question
@@ -1503,6 +1503,36 @@ async function updateQuestion(parent, args, ctx, info) {
     info
   )
 }
+
+async function updateShortQuestion(parent, args, ctx, info) {
+  const userId = await getUserId(ctx)
+  const updateDate = new Date()
+  const questionExists = await ctx.db.exists.Question({
+    id: args.id,
+    addedBy: { id: userId },
+  })
+  if (!questionExists) {
+    throw new Error(`Unauthorized, you are not the author of this question`)
+  }
+
+  return await ctx.db.mutation.updateQuestion(
+    {
+      data: {
+        question: args.question,
+        correctShortAnswer: args.correctShortAnswer,
+        updateDate,
+        updatedBy: {
+          connect: { id: userId },
+        },
+      },
+      where: {
+        id: args.id
+        }
+    },
+    info
+  )
+}
+
 
 async function notificationSent(parent, args, ctx, info) {
 
@@ -2126,6 +2156,7 @@ module.exports = {
   deleteResponseImage,
   addQuestion,
   updateQuestion,
+  updateShortQuestion,
   notificationSent,
   deleteQuestion,
   createQuestion,
