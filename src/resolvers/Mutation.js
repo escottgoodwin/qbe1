@@ -1817,8 +1817,6 @@ async function addChallengeMessage(parent, { challengeMessage, challengeId }, ct
   const challenge = await ctx.db.query.challenge({where: { id: challengeId } },` { answer { question { addedBy { id } sentTo { id } test { course { teachers { id }  } } } } } `)
   const challengers = JSON.stringify(challenge)
 
-
-
     return await ctx.db.mutation.createChallengeMessage(
       {
         data: {
