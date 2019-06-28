@@ -1018,6 +1018,7 @@ async function publishTest(parent, args, ctx, info) {
           connect: { id: sentPanel }
         },
         question: args.question,
+        questionType: 'MULTIPLE_CHOICE',
         expirationTime:args.expirationTime,
         addedDate: publishDate,
         test: {
@@ -1139,6 +1140,7 @@ async function publishTestShort(parent, args, ctx, info) {
           connect: { id: sentPanel }
         },
         question: args.question,
+        questionType: 'SHORT_ANSWER',
         correctShortAnswer: args.correctShortAnswer,
         expirationTime:args.expirationTime,
         addedDate: publishDate,
